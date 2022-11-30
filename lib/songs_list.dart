@@ -1,0 +1,15 @@
+import 'package:flutter/material.dart';
+
+
+  List mySongs = [
+    "Song 1",
+    "Song 2",
+    "Song 3",
+    "Song 4",
+    "Song 5",
+    "Song 6",
+    "Song 7",
+    "Song 8",
+    "Song 9",
+    "Song 10",
+  ];

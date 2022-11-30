@@ -12,6 +12,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSwatch(
+          accentColor: Colors.grey.withOpacity(0.1),
+        )
+      ),
       home: MusicScreen(),
     );
   }
