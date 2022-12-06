@@ -1,5 +1,8 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:music_player/components/drawer_menu_buttons.dart';
+import 'package:music_player/components/sliding_drawer.dart';
 import 'package:music_player/constants.dart';
 import 'package:music_player/songs_list.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -11,29 +14,55 @@ class MusicScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      drawer: Drawer(
-        backgroundColor: Colors.blue,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 25),
-          child: Column(
-            // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              DrawerMenuButton(
-                buttonText: Text("All Songs"),
-                onpress: (){},
+      drawer: Theme(
+        data: Theme.of(context).copyWith(
+          canvasColor: Colors.transparent
+        ),
+        child: Stack(
+          children: [
+            Drawer(
+              width: 260,
+              //backgroundColor: Colors.transparent,
+              //backgroundColor: Color(0xFF7A6FFE),
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 4.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade50.withOpacity(0.2)
+                  ),
+                  padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 10),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      DrawerMenuButton(
+                        child: Text("All Songs"),
+                        onpress: () {},
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      DrawerMenuButton(
+                        child: Text("Current Song"),
+                        onpress: () {},
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      DrawerMenuButton(
+                        child: Text("Settings"),
+                        onpress: () {},
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                    ],
+                  ),
+                ),
               ),
-              SizedBox(height: 10,),
-              DrawerMenuButton(
-                buttonText: Text("Current Song"),
-                onpress: (){},
-              ),
-              SizedBox(height: 10,),
-              DrawerMenuButton(buttonText: Text("Settings"),
-                onpress: (){},),
-              SizedBox(height: 10,),
-            ],
-          ),
+            ),
+
+          ],
         ),
       ),
       appBar: AppBar(
@@ -41,8 +70,8 @@ class MusicScreen extends StatelessWidget {
         elevation: 0,
         backgroundColor: Colors.transparent,
         actions: [
-          IconButton(onPressed: (){}, icon: Icon(Icons.search)),
-          IconButton(onPressed: (){}, icon: Icon(Icons.settings))
+          IconButton(onPressed: () {}, icon: Icon(Icons.search)),
+          IconButton(onPressed: () {}, icon: Icon(Icons.settings))
         ],
       ),
       body: Container(
@@ -94,28 +123,37 @@ class MusicScreen extends StatelessWidget {
                         Divider(),
                       ],
                     );
-                  },),
-              ),
-              Divider(height: 3,),
-              Container(
-                 decoration: BoxDecoration(
-                //   boxShadow: [
-                //     BoxShadow(
-                //       offset: Offset(0, -3),
-                //       blurRadius: 10,
-                //       color: Colors.grey.withOpacity(0.5),
-                //     ),
-                //   ],
-                  color: Colors.transparent,
-                  borderRadius: BorderRadius.only(topRight:Radius.circular(4), topLeft: Radius.circular(4))
+                  },
                 ),
+              ),
+              Divider(
+                height: 3,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                    //   boxShadow: [
+                    //     BoxShadow(
+                    //       offset: Offset(0, -3),
+                    //       blurRadius: 10,
+                    //       color: Colors.grey.withOpacity(0.5),
+                    //     ),
+                    //   ],
+                    color: Colors.transparent,
+                    borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(4),
+                        topLeft: Radius.circular(4))),
                 height: 80,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    IconButton(onPressed: (){}, icon: Icon(FontAwesomeIcons.backwardStep)),
-                    IconButton(onPressed: (){}, icon: Icon(FontAwesomeIcons.play)),
-                    IconButton(onPressed: (){}, icon: Icon(FontAwesomeIcons.forwardStep)),
+                    IconButton(
+                        onPressed: () {},
+                        icon: Icon(FontAwesomeIcons.backwardStep)),
+                    IconButton(
+                        onPressed: () {}, icon: Icon(FontAwesomeIcons.play)),
+                    IconButton(
+                        onPressed: () {},
+                        icon: Icon(FontAwesomeIcons.forwardStep)),
                   ],
                 ),
               ),
@@ -126,4 +164,3 @@ class MusicScreen extends StatelessWidget {
     );
   }
 }
-
