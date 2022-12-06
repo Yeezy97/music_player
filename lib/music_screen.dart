@@ -14,57 +14,6 @@ class MusicScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      drawer: Theme(
-        data: Theme.of(context).copyWith(
-          canvasColor: Colors.transparent
-        ),
-        child: Stack(
-          children: [
-            Drawer(
-              width: 260,
-              //backgroundColor: Colors.transparent,
-              //backgroundColor: Color(0xFF7A6FFE),
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 4.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade50.withOpacity(0.2)
-                  ),
-                  padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 10),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      DrawerMenuButton(
-                        child: Text("All Songs"),
-                        onpress: () {},
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      DrawerMenuButton(
-                        child: Text("Current Song"),
-                        onpress: () {},
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      DrawerMenuButton(
-                        child: Text("Settings"),
-                        onpress: () {},
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-
-          ],
-        ),
-      ),
       appBar: AppBar(
         title: Text("All Songs"),
         elevation: 0,

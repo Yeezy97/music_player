@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:music_player/music_screen.dart';
 
 class CustomDrawer extends StatefulWidget {
   const CustomDrawer({Key? key}) : super(key: key);
@@ -10,15 +11,22 @@ class CustomDrawer extends StatefulWidget {
 class _CustomDrawerState extends State<CustomDrawer> with SingleTickerProviderStateMixin {
 
   late AnimationController animationController;
-  final int minDragStartEdge = 10;
-  final int maxDragStartEdge = 10;
-  bool? _canBeDragged;
+  final int minDragStartEdge = 365;
+  final int maxDragStartEdge = 0;
+  late bool _canBeDragged;
 
   @override
   void initState(){
     super.initState();
     animationController = AnimationController(vsync: this,duration: Duration(milliseconds: 250),
     );
+  }
+
+  void open(){
+    animationController.forward();
+  }
+  void close(){
+    animationController.reverse();
   }
 
   void toggle() => animationController.isDismissed
@@ -33,7 +41,8 @@ class _CustomDrawerState extends State<CustomDrawer> with SingleTickerProviderSt
     _canBeDragged = isDragOpenFromLeft || isDragCloseFromRight;
   }
   void _onDragUpdate(DragUpdateDetails details){
-    if (_canBeDragged!){
+    if (_canBeDragged){
+      print(details.globalPosition.dx);
       double delta = details.primaryDelta! / maxSlide;
       animationController.value += delta;
     }
@@ -44,7 +53,11 @@ class _CustomDrawerState extends State<CustomDrawer> with SingleTickerProviderSt
     if(details.velocity.pixelsPerSecond.dx.abs() >= 365.0){
       double visualVelocity = details.velocity.pixelsPerSecond.dx / MediaQuery.of(context).size.width;
 
-      animationController.fling(velocity: visualVelocity);
+      animationController.fling(velocity:visualVelocity);
+    } else if (animationController.value < 0.5){
+      close();
+    } else{
+      open();
     }
   }
 
@@ -56,12 +69,12 @@ class _CustomDrawerState extends State<CustomDrawer> with SingleTickerProviderSt
     var myChild = Container(color: Colors.yellow);
     return GestureDetector(
       onHorizontalDragStart: _onDragStart,
-      onHorizontalDragUpdate: _onDragUpdate ,
+      onHorizontalDragUpdate: _onDragUpdate,
       onHorizontalDragEnd: _onDragEnd,
-      onTap: toggle,
+      //onTap: toggle,
       child: AnimatedBuilder(
         animation: animationController,
-        builder: (context, _){
+        builder: (BuildContext, _){
 
           double slide = maxSlide * animationController.value;
           double scale = 1 - (animationController.value * 0.3);
@@ -74,7 +87,7 @@ class _CustomDrawerState extends State<CustomDrawer> with SingleTickerProviderSt
                     ..translate(slide)
                     ..scale(scale),
                   alignment: Alignment.centerLeft,
-                  child: myChild),
+                  child: MusicScreen()),
             ],
           );
         },
