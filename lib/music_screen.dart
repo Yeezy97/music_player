@@ -25,7 +25,14 @@ class MusicScreen extends StatelessWidget {
       ),
       body: Container(
         decoration: BoxDecoration(
-          gradient: customGradientColor,
+          gradient: drawerGradientColor,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black54,
+              blurRadius: 10,
+              offset: Offset(0.3, 0.3)
+            )
+          ]
         ),
         child: SafeArea(
           child: Column(
@@ -61,18 +68,21 @@ class MusicScreen extends StatelessWidget {
               // ),
               //Divider(color: Colors.black),
               Expanded(
-                child: ListView.builder(
-                  itemCount: mySongs.length,
-                  itemBuilder: (context, index) {
-                    return Column(
-                      children: [
-                        ListTile(
-                          leading: Text(mySongs[index]),
-                        ),
-                        Divider(),
-                      ],
-                    );
-                  },
+                child: Container(
+                  color: Colors.white,
+                  child: ListView.builder(
+                    itemCount: mySongs.length,
+                    itemBuilder: (context, index) {
+                      return Column(
+                        children: [
+                          ListTile(
+                            leading: Text(mySongs[index]),
+                          ),
+                          Divider(),
+                        ],
+                      );
+                    },
+                  ),
                 ),
               ),
               Divider(
