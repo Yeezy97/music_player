@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:music_player/components/custom_drawer.dart';
 import 'package:music_player/components/drawer_menu_buttons.dart';
 import 'package:music_player/components/sliding_drawer.dart';
 import 'package:music_player/constants.dart';
@@ -15,6 +16,11 @@ class MusicScreen extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.menu),
+          //TODO: drawer on tap function here
+          onPressed: (){},
+        ),
         title: Text("All Songs"),
         elevation: 0,
         backgroundColor: Colors.transparent,
@@ -24,16 +30,10 @@ class MusicScreen extends StatelessWidget {
         ],
       ),
       body: Container(
-        decoration: BoxDecoration(
-          gradient: drawerGradientColor,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black54,
-              blurRadius: 10,
-              offset: Offset(0.3, 0.3)
-            )
-          ]
-        ),
+        decoration: BoxDecoration(gradient: drawerGradientColor, boxShadow: [
+          BoxShadow(
+              color: Colors.black54, blurRadius: 10, offset: Offset(0.3, 0.3))
+        ]),
         child: SafeArea(
           child: Column(
             //mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -69,16 +69,50 @@ class MusicScreen extends StatelessWidget {
               //Divider(color: Colors.black),
               Expanded(
                 child: Container(
-                  color: Colors.white,
+                  color: Colors.white70,
                   child: ListView.builder(
                     itemCount: mySongs.length,
                     itemBuilder: (context, index) {
                       return Column(
                         children: [
-                          ListTile(
-                            leading: Text(mySongs[index]),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 3, vertical: 3),
+                            margin: EdgeInsets.all(1),
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.black54),
+                                color: Colors.white),
+                            child: ListTile(
+                              leading: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.all(3),
+                                    constraints: const BoxConstraints(
+                                      maxHeight: 50,
+                                      maxWidth: 50,
+                                    ),
+                                    child: Image.asset(
+                                      "assets/images/musicLogo.png",
+                                      fit: BoxFit.fill,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 3,
+                                  ),
+                                  Text(mySongs[index]),
+                                ],
+                              ),
+                              trailing: IconButton(
+                                onPressed: (){},
+                                icon: Icon(FontAwesomeIcons.ellipsisVertical,
+                                color: Colors.black87),
+                              ),
+                            ),
                           ),
-                          Divider(),
+                          Divider(
+                            height: 0,
+                          ),
                         ],
                       );
                     },
@@ -99,9 +133,9 @@ class MusicScreen extends StatelessWidget {
                     //   ],
                     color: Colors.transparent,
                     borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(4),
-                        topLeft: Radius.circular(4))),
-                height: 80,
+                        topRight: Radius.circular(10),
+                        topLeft: Radius.circular(10))),
+                height: 70,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

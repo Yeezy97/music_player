@@ -118,7 +118,8 @@ class MyDrawer extends StatelessWidget {
           begin: Alignment.centerRight,
           end: Alignment.centerLeft,
           colors: [
-            Color(0xFF246EE9), // royal blue
+            Colors.black,
+            //Color(0xFF246EE9), // royal blue
             Color(0xFFFF2400), //  scarlet red
             //Colors.white24
           ]
