@@ -3,7 +3,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:music_player/components/custom_drawer.dart';
 import 'package:music_player/components/drawer_menu_buttons.dart';
-import 'package:music_player/components/sliding_drawer.dart';
 import 'package:music_player/constants.dart';
 import 'package:music_player/songs_list.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

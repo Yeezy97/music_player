@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:music_player/components/drawer_tile.dart';
+import 'package:music_player/components/play_list_tile.dart';
 import 'package:music_player/components/drawer_menu_buttons.dart';
 import 'package:music_player/music_screen.dart';
 
@@ -70,35 +73,35 @@ class _CustomDrawerState extends State<CustomDrawer>
 
   final double maxSlide = 225.0;
 
-
   @override
   Widget build(BuildContext context) {
-
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      body: GestureDetector(
-        onHorizontalDragStart: _onDragStart,
-        onHorizontalDragUpdate: _onDragUpdate,
-        onHorizontalDragEnd: _onDragEnd,
-        //onTap: toggle,
-        child: AnimatedBuilder(
-          animation: animationController,
-          builder: (BuildContext context,_ ) {
-            double slide = maxSlide * animationController.value;
-            double scale = 1 - (animationController.value * 0.3);
+    return RepaintBoundary(
+      child: Scaffold(
+        body: GestureDetector(
+          onHorizontalDragStart: _onDragStart,
+          onHorizontalDragUpdate: _onDragUpdate,
+          onHorizontalDragEnd: _onDragEnd,
+          //onTap: toggle,
+          child: AnimatedBuilder(
+            animation: animationController,
+            builder: (BuildContext context, _) {
+              double slide = maxSlide * animationController.value;
+              double scale = 1 - (animationController.value * 0.3);
 
-            return Stack(
-              children: [
-                MyDrawer(),
-                Transform(
-                    transform: Matrix4.identity()
-                      ..translate(slide)
-                      ..scale(scale),
-                    alignment: Alignment.centerLeft,
-                    child: MusicScreen()),
-              ],
-            );
-          },
+              return Stack(
+                children: [
+                  MyDrawer(),
+                  Transform(
+                      transform: Matrix4.identity()
+                        ..translate(slide)
+                        ..scale(scale),
+                      alignment: Alignment.centerLeft,
+                      child: MusicScreen()),
+                ],
+              );
+            },
+          ),
         ),
       ),
     );
@@ -115,15 +118,15 @@ class MyDrawer extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          begin: Alignment.centerRight,
-          end: Alignment.centerLeft,
-          colors: [
-            Colors.black,
-            //Color(0xFF246EE9), // royal blue
-            Color(0xFFFF2400), //  scarlet red
-            //Colors.white24
-          ]
-        ),
+            begin: Alignment.centerRight,
+            end: Alignment.centerLeft,
+            colors: [
+              Colors.black,
+              //Color(0xFF246EE9), // royal blue
+              //Color(0xFFFF2400), //  scarlet red
+              Color(0xFF0C3365),
+              //Colors.white24
+            ]),
       ),
       child: SafeArea(
         child: Column(
@@ -133,26 +136,74 @@ class MyDrawer extends StatelessWidget {
               padding: EdgeInsets.all(8.0),
               width: size.width / 2,
               height: size.height / 6,
-
-              child: Text("Music \n  Player",
-              style: TextStyle(
-                color: Colors.white70,
-                fontSize: 27.0,
-                fontWeight: FontWeight.bold,
-              ),),
+              child: Text(
+                "Music \n  Player",
+                style: TextStyle(
+                  color: Colors.white70,
+                  fontSize: 27.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
-            DrawerMenuButton(
-              child: Text("settings"),
-            ),
-            DrawerMenuButton(
-              child: Text("list"),
-            ),
-            DrawerMenuButton(
-              child: Text("current song"),
-            ),
-            DrawerMenuButton(
-              child: Text("playlist"),
-            ),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              width: size.width * 0.6,
+              height: size.height * 0.7,
+              child: ListView(
+                children: [
+                  DrawerTile(tileIcon: Icons.music_note, drawerTileText: "All Songs"),
+                  DrawerTile(tileIcon: Icons.play_arrow_outlined, drawerTileText:"Current Song"),
+                  ExpansionTile(
+                    title: Row(
+                      children: [
+                        Icon(Icons.playlist_play),
+                        SizedBox(width: 10,),
+                        Text(
+                          "Playlists",
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
+                      ],
+                    ),
+                    children: [
+                      PlayListTile(tileText: "Metal"),
+                      PlayListTile(tileText: "Pop"),
+                      PlayListTile(tileText: "Jazz"),
+                    ],
+                  ),
+                  DrawerTile(tileIcon: Icons.settings, drawerTileText: "Settings"),
+                  DrawerTile(tileIcon: Icons.brush, drawerTileText: "Themes")
+                ],
+              ),
+              // child: Column(
+              //   crossAxisAlignment: CrossAxisAlignment.stretch,
+              //   children: [
+              //     OutlinedButton(
+              //       child: Align(
+              //         alignment: Alignment.centerLeft,
+              //         child: Text(
+              //           "All Songs",
+              //           style: TextStyle(
+              //               fontSize: 15,
+              //               fontWeight: FontWeight.bold,
+              //               color: Colors.white),
+              //         ),
+              //       ),
+              //       style: OutlinedButton.styleFrom(
+              //           padding: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+              //           maximumSize: Size(double.infinity, 50),
+              //           minimumSize: Size(double.infinity, 50),
+              //         backgroundColor: Color(0xFF6667ab),
+              //       ),
+              //       onPressed: () {},
+              //     ),
+              //
+              //
+              //   ],
+              // ),
+            )
           ],
         ),
       ),
