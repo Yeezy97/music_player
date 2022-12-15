@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:music_player/_drawer_test_page.dart';
+import 'package:music_player/components/custom_drawer.dart';
 import 'package:music_player/music_screen.dart';
+import 'package:music_player/pages/song_page.dart';
 
 void main() {
   runApp( MyApp());
@@ -24,7 +26,7 @@ class _MyAppState extends State<MyApp> {
           accentColor: Colors.grey.withOpacity(0.1),
         ),
       ),
-      home: DrawerTestPage(),
+      home: SongPage(),
     );
   }
 }
