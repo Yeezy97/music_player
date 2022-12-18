@@ -41,32 +41,6 @@ class MusicScreen extends StatelessWidget {
               Divider(
                 height: 2,
               ),
-              // Container(
-              //   padding: EdgeInsets.symmetric(horizontal: 8),
-              //   decoration: BoxDecoration(
-              //     // boxShadow: [
-              //     //   BoxShadow(
-              //     //       offset: Offset(0,3),
-              //     //
-              //     //   color: Colors.grey.withOpacity(0.3)),
-              //     // ],
-              //
-              //     //borderRadius: BorderRadius.only(bottomLeft: Radius.circular(4), bottomRight: Radius.circular(4))
-              //   ),
-              //
-              //   height: 65,
-              //   width: double.infinity,
-              //   child: Row(
-              //     children: [
-              //       Drawer(
-              //         width: 60,
-              //       ),
-              //       Text("All Songs"),
-              //
-              //     ],
-              //   ),
-              // ),
-              //Divider(color: Colors.black),
               Expanded(
                 child: Container(
                   color: Colors.white70,
@@ -124,13 +98,6 @@ class MusicScreen extends StatelessWidget {
               ),
               Container(
                 decoration: BoxDecoration(
-                    //   boxShadow: [
-                    //     BoxShadow(
-                    //       offset: Offset(0, -3),
-                    //       blurRadius: 10,
-                    //       color: Colors.grey.withOpacity(0.5),
-                    //     ),
-                    //   ],
                     color: Colors.transparent,
                     borderRadius: BorderRadius.only(
                         topRight: Radius.circular(10),

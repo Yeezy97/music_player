@@ -19,14 +19,6 @@ class _CustomDrawerState extends State<CustomDrawer>
   final int maxDragStartEdge = 0;
   late bool _canBeDragged;
 
-  @override
-  void initState() {
-    super.initState();
-    animationController = AnimationController(
-      vsync: this,
-      duration: Duration(milliseconds: 250),
-    );
-  }
 
   void open() {
     animationController.forward();
