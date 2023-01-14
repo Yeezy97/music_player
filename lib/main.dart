@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:music_player/_drawer_test_page.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:music_player/components/custom_drawer.dart';
-import 'package:music_player/components/custom_drawer_new.dart';
-import 'package:music_player/music_screen.dart';
-import 'package:music_player/pages/song_page.dart';
 import 'package:get/get.dart';
+import 'package:music_player/controllers/audio_query_controller.dart';
+
+OnAudioQueryController audioQueryController = Get.put(OnAudioQueryController());
 
 void main() {
   runApp( MyApp());
+
 }
 
 class MyApp extends StatelessWidget {
@@ -19,11 +20,12 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        textTheme: GoogleFonts.sourceSansProTextTheme(),
         colorScheme: ColorScheme.fromSwatch(
           accentColor: Colors.grey.withOpacity(0.1),
         ),
       ),
-      home: CustomDrawerNew(),
+      home: CustomDrawer(),
     );
   }
 }

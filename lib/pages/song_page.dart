@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:music_player/components/custom_drawer_new.dart';
+import 'package:music_player/components/custom_drawer.dart';
+import 'package:music_player/controllers/audio_controller.dart';
 import 'dart:ui';
+import 'package:audioplayers/audioplayers.dart';
 
 import 'package:music_player/controllers/song_button_controller.dart';
 
@@ -11,36 +13,29 @@ class SongPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SongButtonControllerImp buttonController = Get.put(
-        SongButtonControllerImp());
+    AudioController audioController = Get.put(AudioController());
+    SongButtonControllerImp buttonController =
+        Get.put(SongButtonControllerImp());
 
-    Size size = MediaQuery
-        .of(context)
-        .size;
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
         width: double.infinity,
         decoration: BoxDecoration(
           gradient: LinearGradient(
-              begin: Alignment.centerRight,
-              end: Alignment.centerLeft,
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
               colors: [
                 Colors.black,
-                //Color(0xFF246EE9), // royal blue
-                //Color(0xFFFF2400), //  scarlet red
-                Color(0xFF0C3365),
-                //Colors.white24
+                Color(0xFF181818),
               ]),
         ),
-
         child: SafeArea(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
-
             children: [
               Stack(
                 children: [
-
                   Align(
                     alignment: Alignment.topCenter,
                     child: ShaderMask(
@@ -58,15 +53,14 @@ class SongPage extends StatelessWidget {
                       child: Container(
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: AssetImage("assets/images/weekndlogo1.jpg"),
+                            image: AssetImage("assets/images/eminem.png"),
                             fit: BoxFit.fill,
                           ),
                         ),
-                        padding: EdgeInsets.symmetric(
-                            vertical: 30, horizontal: 50),
+                        padding:
+                            EdgeInsets.symmetric(vertical: 30, horizontal: 50),
                         width: size.width,
                         height: size.height * 0.5,
-
                       ),
                     ),
                   ),
@@ -84,9 +78,8 @@ class SongPage extends StatelessWidget {
                           ),
                         ],
                         image: DecorationImage(
-                            image: AssetImage("assets/images/weekndlogo1.jpg"),
-                            fit: BoxFit.fill
-                        ),
+                            image: AssetImage("assets/images/eminem.png"),
+                            fit: BoxFit.fill),
                         borderRadius: BorderRadius.circular(30),
                         color: Colors.white24,
                       ),
@@ -102,12 +95,14 @@ class SongPage extends StatelessWidget {
                   Positioned(
                     top: 20,
                     left: 20,
-                    child: IconButton(onPressed: (){
-                      Get.to(CustomDrawerNew());
-                    }, icon: Icon(FontAwesomeIcons.arrowLeft)),
+                    child: IconButton(
+                        color: Colors.white70,
+                        onPressed: () {
+                          Get.to(CustomDrawer());
+                        },
+                        icon: Icon(FontAwesomeIcons.arrowLeft)),
                   ),
                 ],
-
               ),
               Container(
                 width: double.infinity,
@@ -116,61 +111,158 @@ class SongPage extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("The Weeknd",
+                      Text(
+                        "The Weeknd",
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 20,
-                            fontWeight: FontWeight.bold
-                        ),),
-                      SizedBox(height: 5,),
-                      Text("Save Your Tears",
+                            fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        "Save Your Tears",
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 18,
-                        ),),
+                        ),
+                      ),
                     ],
                   ),
                 ),
               ),
+              Obx(() {
+                return Slider(
+                    activeColor: Color(0xFFEC4426),
+                    inactiveColor: Color(0xFFD9CFCE),
+                    autofocus: true,
+                    thumbColor: Colors.white,
+                    min: 0,
+                    max:
+                        audioController.songDuration.value.inSeconds.toDouble(),
+                    value:
+                        audioController.songPosition.value.inSeconds.toDouble(),
+                    onChanged: (value) async {
+                      final position = Duration(seconds: value.toInt());
+                      await audioController.audioPlayer.seek(position);
+                      //await audioController.audioPlayer.resume();
+                    });
+              }),
+              Obx(() {
+                return Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        audioController
+                            .formatTime(audioController.songPosition.value),
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                        ),
+                      ),
+                      Text(
+                        audioController.formatTime(
+                            audioController.songDuration.value -
+                                audioController.songPosition.value),
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }),
               Container(
                 width: double.infinity,
                 height: size.height * 0.15,
-                child: GetBuilder<SongButtonControllerImp>(
-                  builder: (buttonController) {
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        IconButton(
-                            onPressed: () {
-
-                            },
-                            iconSize: 20,
-                            color: Colors.white,
-                            icon: Icon(FontAwesomeIcons.repeat)),
-                        IconButton(
-                            onPressed: () {},
-                            color: Colors.white,
-                            icon: Icon(FontAwesomeIcons.backwardStep)),
-                        IconButton(
-                            iconSize: 35,
-                            color: Colors.white,
-                            onPressed: () {
-                              buttonController.play();
-                            }, icon: Icon(
-                            buttonController.isPlaying ? FontAwesomeIcons.circlePause : FontAwesomeIcons.circlePlay)),
-                        IconButton(
-                            onPressed: () {},
-                            color: Colors.white,
-                            icon: Icon(FontAwesomeIcons.forwardStep)),
-                        IconButton(
-                            iconSize: 20,
-                            onPressed: () {},
-                            color: Colors.white,
-                            icon: Icon(FontAwesomeIcons.shuffle)),
-                      ],
-                    );
-                  },
-                ),
+                child: Obx(() {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      IconButton(
+                          onPressed: () {},
+                          iconSize: 20,
+                          color: Colors.white,
+                          icon: Icon(FontAwesomeIcons.repeat)),
+                      IconButton(
+                          onPressed: () {},
+                          color: Colors.white,
+                          icon: Icon(FontAwesomeIcons.backwardStep)),
+                      // IconButton(
+                      //   iconSize: 35,
+                      //   color: Colors.white,
+                      //   onPressed: () async {
+                      //     audioController.isPlaying.value =
+                      //         !audioController.isPlaying.value;
+                      //     if (audioController.isPlaying.value == false) {
+                      //       await audioController.audioPlayer.pause();
+                      //     } else {
+                      //       var path = AssetSource("music/ilira.mp3");
+                      //       await audioController.audioPlayer.play(path);
+                      //     }
+                      //     //buttonController.play();
+                      //   },
+                      //   icon: Icon(
+                      //     audioController.isPlaying.value == false
+                      //         ? FontAwesomeIcons.circlePlay
+                      //         : FontAwesomeIcons.circlePause,
+                      //     //buttonController.isPlaying ? FontAwesomeIcons.circlePause : FontAwesomeIcons.circlePlay
+                      //   ),
+                      // ),
+                      GestureDetector(
+                        onTap: () async {
+                          audioController.isPlaying.value =
+                          !audioController.isPlaying.value;
+                          if (audioController.isPlaying.value == false) {
+                            await audioController.audioPlayer.pause();
+                          } else {
+                            var path = AssetSource("music/ilira.mp3");
+                            await audioController.audioPlayer.play(path);
+                          }
+                          //buttonController.play();
+                        },
+                        child: AnimatedContainer(
+                            duration: Duration(milliseconds: 300),
+                            padding: EdgeInsets.all(8),
+                            height: 47,
+                            width: 47,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                shape: BoxShape.circle,
+                                boxShadow: [
+                                  BoxShadow(
+                                    blurRadius: 8,
+                                    color: audioController.isPlaying.value
+                                        ? Color(0xFFDC5F00)
+                                        : Colors.black,
+                                  ),
+                                ]),
+                            child: Icon(
+                              audioController.isPlaying.value
+                                  ? FontAwesomeIcons.pause
+                                  : FontAwesomeIcons.play,
+                              color: Color(0xFFDC5F00),
+                              size: 18,
+                            ),
+                          ),
+                      ),
+                      IconButton(
+                          onPressed: () {},
+                          color: Colors.white,
+                          icon: Icon(FontAwesomeIcons.forwardStep)),
+                      IconButton(
+                          iconSize: 20,
+                          onPressed: () {},
+                          color: Colors.white,
+                          icon: Icon(FontAwesomeIcons.shuffle)),
+                    ],
+                  );
+                }),
               )
             ],
           ),

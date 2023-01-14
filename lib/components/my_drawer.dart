@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:music_player/components/play_list_tile.dart';
+import 'package:music_player/constants.dart';
 import 'package:music_player/controllers/drawer_controller.dart';
 import 'package:music_player/pages/song_page.dart';
 
@@ -16,15 +17,21 @@ class MyDrawer extends StatelessWidget {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
+        //color: Color(0xFFFAF9F6),
+         //color: Colors.black,
+        //gradient: vividYellowGradientColor,
         gradient: LinearGradient(
-            begin: Alignment.centerRight,
-            end: Alignment.centerLeft,
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
             colors: [
-              Colors.black,
+
+              //Color(0xFFFAF9F6),
+            Color(0x91CBC1BA),
+              //Colors.black,
               //Color(0xFF246EE9), // royal blue
               //Color(0xFFFF2400), //  scarlet red
-              Color(0xFF0C3365),
-              //Colors.white24
+              //Color(0xFF0C3365), // dark blue
+              Colors.white24
             ]),
       ),
       child: SafeArea(
@@ -38,7 +45,7 @@ class MyDrawer extends StatelessWidget {
               child: Text(
                 "Music \n  Player",
                 style: TextStyle(
-                  color: Colors.white70,
+                  color: Colors.black45,
                   fontSize: 27.0,
                   fontWeight: FontWeight.bold,
                 ),
@@ -67,7 +74,7 @@ class MyDrawer extends StatelessWidget {
                           style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
-                              color: Colors.white),
+                              color: Colors.black45),
                         ),
                       ],
                     ),
