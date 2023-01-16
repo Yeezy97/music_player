@@ -42,7 +42,7 @@ class DrawerControllerImp extends DrawerController with GetSingleTickerProviderS
   @override
  void onDragUpdate(DragUpdateDetails details) {
    if (_canBeDragged) {
-     print(details.globalPosition.dx);
+     //print(details.globalPosition.dx);
      double delta = details.primaryDelta! / maxSlide;
      animationController.value += delta;
    }

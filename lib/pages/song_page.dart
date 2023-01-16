@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:music_player/components/custom_drawer.dart';
-import 'package:music_player/controllers/audio_controller.dart';
-import 'dart:ui';
-import 'package:audioplayers/audioplayers.dart';
-
+import 'package:music_player/controllers/audio_query_controller.dart';
 import 'package:music_player/controllers/song_button_controller.dart';
 
 class SongPage extends StatelessWidget {
@@ -13,7 +10,8 @@ class SongPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AudioController audioController = Get.put(AudioController());
+    OnAudioQueryController audioQueryController = Get.put(OnAudioQueryController());
+    //AudioController audioController = Get.put(AudioController());
     SongButtonControllerImp buttonController =
         Get.put(SongButtonControllerImp());
 
@@ -140,12 +138,12 @@ class SongPage extends StatelessWidget {
                     thumbColor: Colors.white,
                     min: 0,
                     max:
-                        audioController.songDuration.value.inSeconds.toDouble(),
+                    audioQueryController.songDuration.value.inSeconds.toDouble(),
                     value:
-                        audioController.songPosition.value.inSeconds.toDouble(),
+                    audioQueryController.songPosition.value.inSeconds.toDouble(),
                     onChanged: (value) async {
                       final position = Duration(seconds: value.toInt());
-                      await audioController.audioPlayer.seek(position);
+                      await audioQueryController.justAudioPlayer.seek(position);
                       //await audioController.audioPlayer.resume();
                     });
               }),
@@ -157,17 +155,17 @@ class SongPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        audioController
-                            .formatTime(audioController.songPosition.value),
+                        audioQueryController
+                            .formatTime(audioQueryController.songPosition.value),
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 12,
                         ),
                       ),
                       Text(
-                        audioController.formatTime(
-                            audioController.songDuration.value -
-                                audioController.songPosition.value),
+                        audioQueryController.formatTime(
+                            audioQueryController.songDuration.value -
+                                audioQueryController.songPosition.value),
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 12,
@@ -216,13 +214,13 @@ class SongPage extends StatelessWidget {
                       // ),
                       GestureDetector(
                         onTap: () async {
-                          audioController.isPlaying.value =
-                          !audioController.isPlaying.value;
-                          if (audioController.isPlaying.value == false) {
-                            await audioController.audioPlayer.pause();
+                          audioQueryController.isPlaying.value =
+                          !audioQueryController.isPlaying.value;
+                          if (audioQueryController.isPlaying.value == false) {
+                            await audioQueryController.justAudioPlayer.pause();
                           } else {
-                            var path = AssetSource("music/ilira.mp3");
-                            await audioController.audioPlayer.play(path);
+                            //var path = AssetSource("music/ilira.mp3");
+                            await audioQueryController.justAudioPlayer.play();
                           }
                           //buttonController.play();
                         },
@@ -237,13 +235,13 @@ class SongPage extends StatelessWidget {
                                 boxShadow: [
                                   BoxShadow(
                                     blurRadius: 8,
-                                    color: audioController.isPlaying.value
+                                    color: audioQueryController.isPlaying.value
                                         ? Color(0xFFDC5F00)
                                         : Colors.black,
                                   ),
                                 ]),
                             child: Icon(
-                              audioController.isPlaying.value
+                              audioQueryController.isPlaying.value
                                   ? FontAwesomeIcons.pause
                                   : FontAwesomeIcons.play,
                               color: Color(0xFFDC5F00),

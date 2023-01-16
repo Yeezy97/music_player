@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:music_player/controllers/drawer_controller.dart';
 import 'package:music_player/pages/all_songs_page.dart';
-import 'my_drawer.dart';
+import 'package:music_player/components/my_drawer.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({Key? key}) : super(key: key);
@@ -10,6 +10,7 @@ class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     DrawerControllerImp controller = Get.put(DrawerControllerImp());
+
     return RepaintBoundary(
       child: Scaffold(
         body: GestureDetector(
@@ -17,27 +18,30 @@ class CustomDrawer extends StatelessWidget {
           onHorizontalDragUpdate: controller.onDragUpdate,
           onHorizontalDragEnd: controller.onDragEnd,
           //onTap: toggle,
-          child: AnimatedBuilder(
-            animation: controller.animationController,
-            builder: (BuildContext context, _) {
-              double slide = controller.maxSlide * controller.animationController.value;
-              //double scale = 1 - (controller.animationController.value * 0.3);
+         child: Stack(
+           children: [
+             AnimatedBuilder(animation:controller.animationController , builder: (BuildContext context, _){
+               double slide = controller.maxSlide * controller.animationController.value;
+               return MyDrawer();
+             }),
+             AnimatedBuilder(
 
-              return Stack(
-                children: [
-                  MyDrawer(),
-                  Transform(
-                      transform: Matrix4.identity()
-                        ..translate(slide),
-                        //..scale(scale),
-                      alignment: Alignment.centerLeft,
-                      child: AllSongsPage()),
-                ],
-              );
-            },
-          ),
+               animation: controller.animationController,
+               builder: (BuildContext context, _) {
+                 double slide = controller.maxSlide * controller.animationController.value;
+                 return Transform(
+                     transform: Matrix4.identity()
+                       ..translate(slide),
+                     //..scale(scale),
+                     alignment: Alignment.centerLeft,
+                     child: AllSongsPage());
+               }
+             ),
+           ],
+         )
+
         ),
       ),
-    );;
+    );
   }
 }
