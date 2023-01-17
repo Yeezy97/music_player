@@ -71,6 +71,12 @@ class DrawerControllerImp extends DrawerController with GetSingleTickerProviderS
       duration: Duration(milliseconds: 250),
     );
   }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    animationController.dispose();
+    super.dispose();
+  }
 
   @override
   goToMusicScreen() {

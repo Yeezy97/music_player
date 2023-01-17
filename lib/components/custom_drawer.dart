@@ -10,7 +10,6 @@ class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     DrawerControllerImp controller = Get.put(DrawerControllerImp());
-
     return RepaintBoundary(
       child: Scaffold(
         body: GestureDetector(
@@ -18,28 +17,24 @@ class CustomDrawer extends StatelessWidget {
           onHorizontalDragUpdate: controller.onDragUpdate,
           onHorizontalDragEnd: controller.onDragEnd,
           //onTap: toggle,
-         child: Stack(
-           children: [
-             AnimatedBuilder(animation:controller.animationController , builder: (BuildContext context, _){
-               double slide = controller.maxSlide * controller.animationController.value;
-               return MyDrawer();
-             }),
-             AnimatedBuilder(
-
-               animation: controller.animationController,
-               builder: (BuildContext context, _) {
-                 double slide = controller.maxSlide * controller.animationController.value;
-                 return Transform(
-                     transform: Matrix4.identity()
-                       ..translate(slide),
-                     //..scale(scale),
-                     alignment: Alignment.centerLeft,
-                     child: AllSongsPage());
-               }
-             ),
-           ],
-         )
-
+          child: AnimatedBuilder(
+            child: AllSongsPage(),
+            animation: controller.animationController,
+            builder: (BuildContext context, child) {
+              double slide = controller.maxSlide * controller.animationController.value;
+              print("build complete");
+              return Stack(
+                children: [
+                  MyDrawer(),
+                  Transform(
+                    transform: Matrix4.identity()
+                      ..translate(slide),
+                    alignment: Alignment.centerLeft,
+                    child: child,),
+                ],
+              );
+            },
+          ),
         ),
       ),
     );

@@ -18,8 +18,9 @@ class NewCustomDrawer extends StatelessWidget {
           onHorizontalDragEnd: controller.onDragEnd,
           //onTap: toggle,
           child: AnimatedBuilder(
+            child: AllSongsPage(),
             animation: controller.animationController,
-            builder: (BuildContext context, _) {
+            builder: (BuildContext context, child) {
               double slide = controller.maxSlide * controller.animationController.value;
               print("build complete");
               //double scale = 1 - (controller.animationController.value * 0.3);
@@ -28,12 +29,11 @@ class NewCustomDrawer extends StatelessWidget {
                 children: [
                   MyDrawer(),
                   Transform(
-
                       transform: Matrix4.identity()
                         ..translate(slide),
                       //..scale(scale),
                       alignment: Alignment.centerLeft,
-                      child: AllSongsPage()),
+                      child: child,),
                 ],
               );
             },

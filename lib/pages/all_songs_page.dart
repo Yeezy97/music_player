@@ -22,6 +22,7 @@ class AllSongsPage extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     DrawerControllerImp drawerControllerImp = Get.put(DrawerControllerImp());
     //AudioController audioController = Get.put(AudioController());
+
     return Scaffold(
       appBar: AppBar(
         leading: Padding(
@@ -113,6 +114,8 @@ class AllSongsPage extends StatelessWidget {
                       child: Text(" No Songs Found"),
                     );
                   }
+                  audioQueryController.songs.clear();
+                  audioQueryController.songs = item.data!;
                   return ListView.builder(
                     itemCount: item.data!.length,
                     itemBuilder: (context, index) {
@@ -261,13 +264,17 @@ class AllSongsPage extends StatelessWidget {
                                       blurRadius: 5,
                                       color: Colors.black45)
                                 ],
-                                image: DecorationImage(
-                                  image: AssetImage(
-                                      "assets/images/weekndlogo1.jpg"),
-                                  fit: BoxFit.fill,
-                                ),
+                                // image: DecorationImage(
+                                //   image: AssetImage(
+                                //       "assets/images/weekndlogo1.jpg"),
+                                //   fit: BoxFit.fill,
+                                // ),
                                 color: Colors.grey,
                                 borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: QueryArtworkWidget(
+                                id:1,
+                                type: ArtworkType.AUDIO,
                               ),
                             ), // song thumbnail
                             SizedBox(
