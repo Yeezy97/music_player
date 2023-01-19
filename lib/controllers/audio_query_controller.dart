@@ -14,12 +14,14 @@ class OnAudioQueryController extends GetxController{
   RxString currentSongTitle = ' '.obs;
   RxInt currentIndex = 0.obs;
   bool isPlayerViewVisible = false;
+  bool isSelectedTile = false;
 
 
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
+    createPlayList(songs);
     requestStoragePermission();
     justAudioPlayer.durationStream.listen((newDuration) {
       songDuration.value = newDuration!;
@@ -70,5 +72,16 @@ class OnAudioQueryController extends GetxController{
       currentIndex.value = index;
     }
   }
+  ConcatenatingAudioSource createPlayList(List<SongModel> songs) {
+    List<AudioSource> sources = [];
+    for (var song in songs){
+      sources.add(AudioSource.uri(Uri.parse(song.uri!)));
+    }
+    return ConcatenatingAudioSource(children: sources);
+  }
 
+  void selectedTile(){
+    isSelectedTile = !isSelectedTile;
+    update();
+  }
 }

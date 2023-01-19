@@ -18,8 +18,10 @@ class AllSongsPage extends StatelessWidget {
     //OnAudioQuery onAudioQuery = OnAudioQuery();
 
     OnAudioQueryController audioQueryController =
-        Get.put(OnAudioQueryController());
-    Size size = MediaQuery.of(context).size;
+    Get.put(OnAudioQueryController());
+    Size size = MediaQuery
+        .of(context)
+        .size;
     DrawerControllerImp drawerControllerImp = Get.put(DrawerControllerImp());
     //AudioController audioController = Get.put(AudioController());
 
@@ -114,7 +116,7 @@ class AllSongsPage extends StatelessWidget {
                       child: Text(" No Songs Found"),
                     );
                   }
-                  audioQueryController.songs.clear();
+                  //audioQueryController.songs.clear();
                   audioQueryController.songs = item.data!;
                   return ListView.builder(
                     itemCount: item.data!.length,
@@ -122,92 +124,114 @@ class AllSongsPage extends StatelessWidget {
                       return Column(
                         children: [
                           Container(
-                            padding: EdgeInsets.symmetric(vertical: 3),
+                            padding: EdgeInsets.symmetric(vertical: 2),
                             margin: EdgeInsets.all(0),
                             decoration: BoxDecoration(
-                                border: Border.all(color: Colors.black54),
-                                color: Colors.black45.withOpacity(0.8)
-                                //color: Colors.transparent
-                                //color: Color(0xCC23223A),
-                                //color: Color(0xA8210B00),
-                                //color: Color(0xFF282A3A)
-                                //color: Color(0x916D5E57),
-                                ),
-                            child: ListTile(
-                              leading: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Container(
-                                    padding: EdgeInsets.all(3),
-                                    constraints: const BoxConstraints(
-                                      maxHeight: 50,
-                                      maxWidth: 50,
-                                    ),
-                                    child: QueryArtworkWidget(
-                                      id: item.data![index].id,
-                                      type: ArtworkType.AUDIO,
-                                    ),
-                                    // child: Image.asset(
-                                    //   "assets/images/musicLogo.png",
-                                    //   fit: BoxFit.fill,
-                                    //   color: Colors.white,
-                                    // ),
-                                  ),
-                                  SizedBox(
-                                    width: 3,
-                                  ),
-                                  Container(
-                                    child: Column(
+                              border: Border.all(color: Colors.black54),
+                              //color: Colors.black45.withOpacity(0.8)
+                              //color: Colors.transparent
+                              //color: Color(0xCC23223A),
+                              //color: Color(0xA8210B00),
+                              //color: Color(0xFF282A3A)
+                              //color: Color(0x916D5E57),
+                            ),
+                            child: GetBuilder<OnAudioQueryController>(
+                                builder: (logic) {
+                                  return ListTile(
+                                    leading: Row(
+                                      mainAxisSize: MainAxisSize.min,
                                       children: [
-                                        Text(
-                                          item.data![index].title,
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 15,
+                                        Container(
+                                          padding: EdgeInsets.all(3),
+                                          constraints: const BoxConstraints(
+                                            maxHeight: 50,
+                                            maxWidth: 50,
                                           ),
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
+                                          decoration: BoxDecoration(
+                                            color: Colors.black,
+                                            borderRadius: BorderRadius.circular(
+                                                5),
+                                          ),
+                                          child: QueryArtworkWidget(
+                                            id: item.data![index].id,
+                                            type: ArtworkType.AUDIO,
+                                            artworkFit: BoxFit.fill,
+                                            size: 200,
+                                            artworkBorder: BorderRadius
+                                                .circular(5),
+                                            nullArtworkWidget: Icon(
+                                              Icons.music_note_outlined,
+                                              color: Colors.white, size: 50,),
+                                          ),
+                                          // child: Image.asset(
+                                          //   "assets/images/musicLogo.png",
+                                          //   fit: BoxFit.fill,
+                                          //   color: Colors.white,
+                                          // ),
                                         ),
-                                        Text(
-                                          item.data![index].displayName,
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 10),
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
+                                        SizedBox(
+                                          width: 3,
+                                        ),
+                                        Container(
+                                          child: Column(
+                                            children: [
+                                              Text(
+                                                item.data![index].title,
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 15,
+                                                ),
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
+                                              Text(
+                                                item.data![index].displayName,
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 10),
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
+                                            ],
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                            mainAxisSize: MainAxisSize.min,
+                                          ),
+                                          constraints: BoxConstraints(
+                                              minWidth: size.width * 0.5,
+                                              maxWidth: size.width * 0.6),
+                                          padding: EdgeInsets.all(5),
                                         ),
                                       ],
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisSize: MainAxisSize.min,
                                     ),
-                                    constraints: BoxConstraints(
-                                        minWidth: size.width * 0.5,
-                                        maxWidth: size.width * 0.6),
-                                    padding: EdgeInsets.all(5),
-                                  ),
-                                ],
-                              ),
-                              trailing: IconButton(
-                                onPressed: () {},
-                                icon: Icon(
-                                  FontAwesomeIcons.ellipsisVertical,
-                                  color: Colors.white,
-                                  size: 20,
-                                ),
-                              ),
-                              tileColor: Colors.white70.withOpacity(0.9),
-                              onTap: () async {
-                                String? uri = item.data![index].uri;
-                                await audioQueryController.justAudioPlayer
-                                    .setAudioSource(
-                                        AudioSource.uri(Uri.parse(uri!)));
-                                await audioQueryController.justAudioPlayer
-                                    .play();
-                                audioQueryController.isPlaying.value =
-                                    !audioQueryController.isPlaying.value;
-                              },
-                            ),
+                                    trailing: IconButton(
+                                      onPressed: () {},
+                                      icon: Icon(
+                                        FontAwesomeIcons.ellipsisVertical,
+                                        color: Colors.white,
+                                        size: 20,
+                                      ),
+                                    ),
+                                    tileColor: Colors.white70.withOpacity(0.9),
+                                    onTap: () async {
+                                      //String? uri = item.data![index].uri;
+                                      await audioQueryController.justAudioPlayer
+                                          .setAudioSource(
+                                          audioQueryController.createPlayList(
+                                              item.data!),
+                                          initialIndex: index);
+                                      //AudioSource.uri(Uri.parse(uri!)));
+                                      await audioQueryController.justAudioPlayer
+                                          .play();
+                                      audioQueryController.isPlaying.value =
+                                      !audioQueryController.isPlaying.value;
+                                      audioQueryController.selectedTile();
+                                    },
+                                    selected: audioQueryController
+                                        .isSelectedTile,
+                                    selectedTileColor: audioQueryController.isSelectedTile ? Colors.grey : null,
+                                  );
+                                }),
                           ),
                         ],
                       );
@@ -231,14 +255,14 @@ class AllSongsPage extends StatelessWidget {
                 children: [
                   Padding(
                     padding:
-                        const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     child: GestureDetector(
                       onTap: () {
                         Get.to(() => SongPage());
                       },
                       child: Container(
                         padding:
-                            EdgeInsets.symmetric(vertical: 4, horizontal: 5),
+                        EdgeInsets.symmetric(vertical: 4, horizontal: 5),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           gradient: LinearGradient(
@@ -273,8 +297,15 @@ class AllSongsPage extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: QueryArtworkWidget(
-                                id:1,
+                                id: audioQueryController.currentIndex.value > 0
+                                    ? audioQueryController
+                                    .songs[audioQueryController.currentIndex
+                                    .value].id
+                                    : 0,
                                 type: ArtworkType.AUDIO,
+                                nullArtworkWidget: Icon(
+                                  Icons.music_note, color: Colors.white,
+                                  size: 50,),
                               ),
                             ), // song thumbnail
                             SizedBox(
@@ -321,7 +352,7 @@ class AllSongsPage extends StatelessWidget {
                         //var path = AssetSource("music/ilira.mp3");
                         await audioQueryController.justAudioPlayer.play();
                         audioQueryController.isPlaying.value =
-                            !audioQueryController.isPlaying.value;
+                        !audioQueryController.isPlaying.value;
                       }
                       //buttonController.play();
                     },
@@ -391,4 +422,6 @@ class AllSongsPage extends StatelessWidget {
       ),
     );
   }
+
+
 }

@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:music_player/components/custom_drawer.dart';
 import 'package:music_player/controllers/audio_query_controller.dart';
 import 'package:music_player/controllers/song_button_controller.dart';
+import 'package:on_audio_query/on_audio_query.dart';
 
 class SongPage extends StatelessWidget {
   const SongPage({Key? key}) : super(key: key);
@@ -67,6 +68,10 @@ class SongPage extends StatelessWidget {
                     left: 80,
                     right: 80,
                     child: Container(
+                      constraints: BoxConstraints(
+                        maxWidth: size.width * 0.6,
+                        maxHeight: size.width * 0.6,
+                      ),
                       decoration: BoxDecoration(
                         boxShadow: [
                           BoxShadow(
@@ -75,14 +80,21 @@ class SongPage extends StatelessWidget {
                             blurRadius: 5,
                           ),
                         ],
-                        image: DecorationImage(
-                            image: AssetImage("assets/images/eminem.png"),
-                            fit: BoxFit.fill),
-                        borderRadius: BorderRadius.circular(30),
-                        color: Colors.white24,
+                      //   image: DecorationImage(
+                      //       image: AssetImage("assets/images/eminem.png"),
+                      //       fit: BoxFit.fill),
+                      //   borderRadius: BorderRadius.circular(30),
+                      //   color: Colors.white24,
+                      //
+                       ),
+                      child: QueryArtworkWidget(
+                        id: audioQueryController.songs != null ? audioQueryController.songs[audioQueryController.currentIndex.value].id :null!,
+                        type: ArtworkType.AUDIO,
+                        artworkFit: BoxFit.fill,
+                        nullArtworkWidget: Icon(Icons.music_note, color: Colors.white,size: 200,),
                       ),
-                      width: size.width * 0.6,
-                      height: size.width * 0.6,
+                      // width: size.width * 0.6,
+                      // height: size.width * 0.6,
 
                       alignment: Alignment.bottomCenter,
                       // child: Image.asset("assets/images/weekndlogo1.jpg",
