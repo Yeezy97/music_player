@@ -22,7 +22,7 @@ class SongPage extends StatelessWidget {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
+              end: Alignment.bottomRight,
               colors: [
                 Colors.black,
                 Color(0xFF181818),
