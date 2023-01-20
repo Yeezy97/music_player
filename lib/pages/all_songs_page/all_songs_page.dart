@@ -1,86 +1,82 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:music_player/controllers/audio_query_controller.dart';
+import 'package:music_player/controllers/selected_index_controller.dart';
 import 'package:music_player/pages/settings_page.dart';
 import 'package:music_player/pages/song_page.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../controllers/drawer_controller.dart';
+import '../../controllers/drawer_controller.dart';
 import 'package:on_audio_query/on_audio_query.dart';
-import 'package:just_audio/just_audio.dart';
+import 'all_songs_page_widgets/artwork_widget.dart';
 
 class AllSongsPage extends StatelessWidget {
   const AllSongsPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    AudioPlayer justAudio = AudioPlayer();
-    //OnAudioQuery onAudioQuery = OnAudioQuery();
-
+    SelectedIndexController selectedIndexController =
+    Get.put(SelectedIndexController());
     OnAudioQueryController audioQueryController =
     Get.put(OnAudioQueryController());
     Size size = MediaQuery
         .of(context)
         .size;
     DrawerControllerImp drawerControllerImp = Get.put(DrawerControllerImp());
-    //AudioController audioController = Get.put(AudioController());
 
     return Scaffold(
       appBar: AppBar(
         leading: Padding(
           padding: const EdgeInsets.only(left: 20),
           child: MaterialButton(
-            shape: CircleBorder(),
+            shape: const CircleBorder(),
             //color: Color(0xFFE0DCCE),
-            color: Color(0xFF010101),
+            color: const Color(0xFF010101),
             minWidth: 35,
             enableFeedback: false,
-            padding: EdgeInsets.all(3),
+            padding: const EdgeInsets.all(3),
             height: 10,
             elevation: 8,
-            //TODO: drawer on tap function here
             onPressed: () {
               drawerControllerImp.toggle();
             },
-
-            child: Icon(
+            child: const Icon(
               Icons.menu,
               size: 22,
               color: Color(0xFFDC5F00),
             ),
           ),
         ),
-        title: Text(
+        title: const Text(
           "All Songs",
           style: TextStyle(
             color: Color(0xFFDC5F00),
           ),
         ),
         elevation: 0,
-        backgroundColor: Color(0xFF181818),
+        backgroundColor: const Color(0xFF181818),
         actions: [
           GestureDetector(
             // search button
             child: Container(
-              margin: EdgeInsets.only(right: 5),
+              margin: const EdgeInsets.only(right: 5),
               color: Colors.transparent,
               width: 40,
               height: 40,
-              child: Icon(Icons.search),
+              child: const Icon(Icons.search),
             ),
             onTap: () {},
           ),
           GestureDetector(
             // settings button
             child: Container(
-              margin: EdgeInsets.only(right: 20),
+              margin: const EdgeInsets.only(right: 20),
               color: Colors.transparent,
               width: 40,
               height: 40,
-              child: Icon(Icons.settings),
+              child: const Icon(Icons.settings),
             ),
             onTap: () {
-              Get.to(() => SettingsPage());
+              Get.to(() => const SettingsPage());
             },
           ),
         ],
@@ -89,14 +85,12 @@ class AllSongsPage extends StatelessWidget {
         children: [
           Container(
             decoration: BoxDecoration(
-              color: Colors.black45.withOpacity(0.5),
-              image: DecorationImage(
-                  opacity: 0.4,
-                  image: AssetImage("assets/images/background3.jpg"),
-                  fit: BoxFit.fill),
+              color: Colors.black.withOpacity(0.8),
+              image: const DecorationImage(
+                  opacity: 0.1,
+                  image: AssetImage("assets/images/music_note_background4.png"),
+                  fit: BoxFit.cover),
             ),
-            //color: Colors.white70,
-            //color: Color(0xFF282A3A),
             child: FutureBuilder<List<SongModel>>(
                 future: audioQueryController.onAudioQuery.querySongs(
                   sortType: null,
@@ -119,30 +113,25 @@ class AllSongsPage extends StatelessWidget {
                   //audioQueryController.songs.clear();
                   audioQueryController.songs = item.data!;
                   return ListView.builder(
-                    itemCount: item.data!.length,
+                    itemCount: audioQueryController.songs.length,
                     itemBuilder: (context, index) {
                       return Column(
                         children: [
                           Container(
-                            padding: EdgeInsets.symmetric(vertical: 2),
-                            margin: EdgeInsets.all(0),
+                            padding: const EdgeInsets.symmetric(vertical: 0),
+                            margin: const EdgeInsets.all(0),
                             decoration: BoxDecoration(
                               border: Border.all(color: Colors.black54),
-                              //color: Colors.black45.withOpacity(0.8)
-                              //color: Colors.transparent
-                              //color: Color(0xCC23223A),
-                              //color: Color(0xA8210B00),
-                              //color: Color(0xFF282A3A)
-                              //color: Color(0x916D5E57),
+                              //color: Colors.transparent,
                             ),
                             child: GetBuilder<OnAudioQueryController>(
-                                builder: (logic) {
+                                builder: (_) {
                                   return ListTile(
                                     leading: Row(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
                                         Container(
-                                          padding: EdgeInsets.all(3),
+                                          padding: const EdgeInsets.all(0),
                                           constraints: const BoxConstraints(
                                             maxHeight: 50,
                                             maxWidth: 50,
@@ -150,86 +139,81 @@ class AllSongsPage extends StatelessWidget {
                                           decoration: BoxDecoration(
                                             color: Colors.black,
                                             borderRadius: BorderRadius.circular(
-                                                5),
+                                                15),
                                           ),
-                                          child: QueryArtworkWidget(
-                                            id: item.data![index].id,
-                                            type: ArtworkType.AUDIO,
-                                            artworkFit: BoxFit.fill,
-                                            size: 200,
-                                            artworkBorder: BorderRadius
-                                                .circular(5),
-                                            nullArtworkWidget: Icon(
-                                              Icons.music_note_outlined,
-                                              color: Colors.white, size: 50,),
+                                          child: ArtWorkWidget(
+                                            artworkSize: 200,
+                                            audioQueryController:
+                                            audioQueryController,
+                                            index: index,
                                           ),
-                                          // child: Image.asset(
-                                          //   "assets/images/musicLogo.png",
-                                          //   fit: BoxFit.fill,
-                                          //   color: Colors.white,
-                                          // ),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 3,
                                         ),
                                         Container(
+                                          constraints: BoxConstraints(
+                                              minWidth: size.width * 0.5,
+                                              maxWidth: size.width * 0.6),
+                                          padding: const EdgeInsets.all(5),
                                           child: Column(
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                            mainAxisSize: MainAxisSize.min,
                                             children: [
                                               Text(
-                                                item.data![index].title,
-                                                style: TextStyle(
-                                                  color: Colors.white,
+                                                audioQueryController
+                                                    .songs[index].title,
+                                                style:  TextStyle(
+                                                  color: selectedIndexController.selectedIndex ==
+                                                      index ? const Color(0xFFDC5F00) : Colors.white,
                                                   fontSize: 15,
                                                 ),
                                                 maxLines: 1,
                                                 overflow: TextOverflow.ellipsis,
                                               ),
                                               Text(
-                                                item.data![index].displayName,
-                                                style: TextStyle(
-                                                    color: Colors.white,
+                                                audioQueryController
+                                                    .songs[index].artist!,
+                                                style:  TextStyle(
+                                                    color: selectedIndexController.selectedIndex ==
+                                                        index ? const Color(0xFFDC5F00) : Colors.white,
                                                     fontSize: 10),
                                                 maxLines: 1,
                                                 overflow: TextOverflow.ellipsis,
                                               ),
                                             ],
-                                            crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                            mainAxisSize: MainAxisSize.min,
                                           ),
-                                          constraints: BoxConstraints(
-                                              minWidth: size.width * 0.5,
-                                              maxWidth: size.width * 0.6),
-                                          padding: EdgeInsets.all(5),
                                         ),
                                       ],
                                     ),
                                     trailing: IconButton(
                                       onPressed: () {},
-                                      icon: Icon(
+                                      icon: const Icon(
                                         FontAwesomeIcons.ellipsisVertical,
                                         color: Colors.white,
                                         size: 20,
                                       ),
                                     ),
-                                    tileColor: Colors.white70.withOpacity(0.9),
+                                    tileColor:
+                                    selectedIndexController.selectedIndex ==
+                                        index
+                                        ? Color(0xFFCC3609)
+                                        : Colors.black87.withOpacity(0.8),
                                     onTap: () async {
-                                      //String? uri = item.data![index].uri;
+                                      selectedIndexController.updateIndex(
+                                          index);
                                       await audioQueryController.justAudioPlayer
                                           .setAudioSource(
-                                          audioQueryController.createPlayList(
-                                              item.data!),
-                                          initialIndex: index);
-                                      //AudioSource.uri(Uri.parse(uri!)));
+                                        audioQueryController.createPlayList(
+                                            audioQueryController.songs),
+                                        initialIndex: index,
+                                      );
                                       await audioQueryController.justAudioPlayer
                                           .play();
                                       audioQueryController.isPlaying.value =
                                       !audioQueryController.isPlaying.value;
-                                      audioQueryController.selectedTile();
                                     },
-                                    selected: audioQueryController
-                                        .isSelectedTile,
-                                    selectedTileColor: audioQueryController.isSelectedTile ? Colors.grey : null,
                                   );
                                 }),
                           ),
@@ -244,13 +228,13 @@ class AllSongsPage extends StatelessWidget {
             right: 0,
             left: 0,
             child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   color: Color(0xFF181818),
                   borderRadius: BorderRadius.only(
                       topRight: Radius.circular(10),
                       topLeft: Radius.circular(10))),
               height: 70,
-              width: double.infinity,
+              width: size.width * 0.39,
               child: Row(
                 children: [
                   Padding(
@@ -258,14 +242,14 @@ class AllSongsPage extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     child: GestureDetector(
                       onTap: () {
-                        Get.to(() => SongPage());
+                        Get.to(() => const SongPage());
                       },
                       child: Container(
-                        padding:
-                        EdgeInsets.symmetric(vertical: 4, horizontal: 5),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 4, horizontal: 5),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          gradient: LinearGradient(
+                          gradient: const LinearGradient(
                               begin: Alignment.centerLeft,
                               end: Alignment.centerRight,
                               colors: [
@@ -274,7 +258,7 @@ class AllSongsPage extends StatelessWidget {
                               ]),
                         ),
                         height: 60,
-                        width: size.width * 0.39,
+                        width: size.width * 0.48,
                         child: Row(
                           children: [
                             Container(
@@ -282,52 +266,56 @@ class AllSongsPage extends StatelessWidget {
                               height: 50,
                               width: 50,
                               decoration: BoxDecoration(
-                                boxShadow: [
+                                boxShadow: const [
                                   BoxShadow(
                                       offset: Offset(5, 5),
                                       blurRadius: 5,
                                       color: Colors.black45)
                                 ],
-                                // image: DecorationImage(
-                                //   image: AssetImage(
-                                //       "assets/images/weekndlogo1.jpg"),
-                                //   fit: BoxFit.fill,
-                                // ),
-                                color: Colors.grey,
                                 borderRadius: BorderRadius.circular(10),
                               ),
-                              child: QueryArtworkWidget(
-                                id: audioQueryController.currentIndex.value > 0
-                                    ? audioQueryController
-                                    .songs[audioQueryController.currentIndex
-                                    .value].id
-                                    : 0,
-                                type: ArtworkType.AUDIO,
-                                nullArtworkWidget: Icon(
-                                  Icons.music_note, color: Colors.white,
-                                  size: 50,),
-                              ),
+                              child: GetBuilder<OnAudioQueryController>(builder: (logic) {
+                                return ArtWorkWidget(audioQueryController: audioQueryController, index: audioQueryController.currentIndex, artworkSize: 200);
+                              }),
                             ), // song thumbnail
-                            SizedBox(
-                              width: 8,
+                            const SizedBox(
+                              width: 7,
                             ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Artist",
-                                  style: TextStyle(
-                                    color: Color(0xFFDC5F00),
-                                  ),
-                                ),
-                                Text(
-                                  "Song Name",
-                                  style: TextStyle(
-                                    color: Color(0xFFDC5F00),
-                                  ),
-                                ),
-                              ],
+                            Container(
+                              padding: const EdgeInsets.all(3.0),
+                              constraints: BoxConstraints(
+                                maxWidth: size.width * 0.29,
+                                maxHeight: 50,
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  GetBuilder<OnAudioQueryController>(
+                                      builder: (logic) {
+                                        return Text(
+                                          audioQueryController.currentSongTitle,
+                                          style: const TextStyle(
+                                            color: Color(0xFFDC5F00),
+                                          ),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                        );
+                                      }),
+                                  GetBuilder<OnAudioQueryController>(
+                                      builder: (logic) {
+                                        return Text(
+                                          audioQueryController
+                                              .currentSongArtist,
+                                          style: const TextStyle(
+                                            color: Color(0xFFDC5F00),
+                                          ),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                        );
+                                      }),
+                                ],
+                              ),
                             )
                           ],
                         ),
@@ -335,11 +323,11 @@ class AllSongsPage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    width: size.width * 0.10,
+                    width: size.width * 0.03,
                   ),
                   IconButton(
                       onPressed: () {},
-                      icon: Icon(
+                      icon: const Icon(
                         FontAwesomeIcons.backwardStep,
                         color: Colors.white,
                         size: 18,
@@ -349,17 +337,15 @@ class AllSongsPage extends StatelessWidget {
                       if (audioQueryController.isPlaying.value == true) {
                         await audioQueryController.justAudioPlayer.pause();
                       } else {
-                        //var path = AssetSource("music/ilira.mp3");
                         await audioQueryController.justAudioPlayer.play();
                         audioQueryController.isPlaying.value =
                         !audioQueryController.isPlaying.value;
                       }
-                      //buttonController.play();
                     },
                     child: Obx(() {
                       return AnimatedContainer(
-                        duration: Duration(milliseconds: 300),
-                        padding: EdgeInsets.all(8),
+                        duration: const Duration(milliseconds: 300),
+                        padding: const EdgeInsets.all(8),
                         height: 47,
                         width: 47,
                         decoration: BoxDecoration(
@@ -369,7 +355,7 @@ class AllSongsPage extends StatelessWidget {
                               BoxShadow(
                                 blurRadius: 10,
                                 color: audioQueryController.isPlaying.value
-                                    ? Color(0xFFDC5F00)
+                                    ? const Color(0xFFDC5F00)
                                     : Colors.black,
                               ),
                             ]),
@@ -377,39 +363,15 @@ class AllSongsPage extends StatelessWidget {
                           audioQueryController.isPlaying.value
                               ? FontAwesomeIcons.pause
                               : FontAwesomeIcons.play,
-                          color: Color(0xFFDC5F00),
+                          color: const Color(0xFFDC5F00),
                           size: 18,
                         ),
                       );
                     }),
                   ),
-
-                  // MaterialButton(
-                  //   minWidth: 47,
-                  //   enableFeedback: false,
-                  //   padding: EdgeInsets.all(8),
-                  //   height: 47,
-                  //   elevation: 5,
-                  //
-                  //   onPressed: () {},
-                  //   color: Colors.white,
-                  //   shape: CircleBorder(),
-                  //   child: Icon(
-                  //     FontAwesomeIcons.play,
-                  //     color: Color(0xFFDC5F00),
-                  //     size: 18,
-                  //   ),
-                  // ),
-                  // IconButton(
-                  //   color: Colors.white,
-                  //     style: IconButton.styleFrom(
-                  //       backgroundColor: Colors.white,
-                  //       shape: CircleBorder(),
-                  //     ),
-                  //     onPressed: () {}, icon: Icon(FontAwesomeIcons.play)),
                   IconButton(
                       onPressed: () {},
-                      icon: Icon(
+                      icon: const Icon(
                         FontAwesomeIcons.forwardStep,
                         color: Colors.white,
                         size: 18,
@@ -422,6 +384,4 @@ class AllSongsPage extends StatelessWidget {
       ),
     );
   }
-
-
 }

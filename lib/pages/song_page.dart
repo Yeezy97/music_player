@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:music_player/components/custom_drawer.dart';
 import 'package:music_player/controllers/audio_query_controller.dart';
 import 'package:music_player/controllers/song_button_controller.dart';
+import 'package:music_player/pages/all_songs_page/all_songs_page_widgets/artwork_widget.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 class SongPage extends StatelessWidget {
@@ -12,15 +13,13 @@ class SongPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     OnAudioQueryController audioQueryController = Get.put(OnAudioQueryController());
-    //AudioController audioController = Get.put(AudioController());
-    SongButtonControllerImp buttonController =
-        Get.put(SongButtonControllerImp());
+    SongButtonControllerImp buttonController = Get.put(SongButtonControllerImp());
 
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
         width: double.infinity,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
@@ -50,56 +49,55 @@ class SongPage extends StatelessWidget {
                             ]).createShader(bounds);
                       },
                       child: Container(
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage("assets/images/eminem.png"),
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                        padding:
-                            EdgeInsets.symmetric(vertical: 30, horizontal: 50),
                         width: size.width,
                         height: size.height * 0.5,
+                        child: ArtWorkWidget(
+                          artworkSize: 400,audioQueryController: audioQueryController, index: audioQueryController.currentIndex,
+                        ),
+                        // child: QueryArtworkWidget(
+                        //   id: audioQueryController.songs != null ? audioQueryController.songs[audioQueryController.currentIndex].id :null!,
+                        //   type: ArtworkType.AUDIO,
+                        //   artworkFit: BoxFit.cover,
+                        //   artworkHeight: size.height * 0.5,
+                        //   artworkWidth: size.width,
+                        //   size: 1000,
+                        //   artworkQuality: FilterQuality.high,
+                        //   artworkBorder: BorderRadius.circular(5),
+                        //   nullArtworkWidget: Icon(Icons.music_note, color: Colors.white,size: 200,),
+                        // ),
                       ),
                     ),
                   ),
                   Positioned(
-                    top: 70,
+                    top: 80,
                     left: 80,
                     right: 80,
+                    bottom: 80,
                     child: Container(
                       constraints: BoxConstraints(
                         maxWidth: size.width * 0.6,
                         maxHeight: size.width * 0.6,
                       ),
-                      decoration: BoxDecoration(
-                        boxShadow: [
+                      decoration:  BoxDecoration(
+                        boxShadow: const [
                           BoxShadow(
                             offset: Offset(5, 5),
                             color: Colors.black,
-                            blurRadius: 5,
+                            blurRadius: 15,
                           ),
                         ],
-                      //   image: DecorationImage(
-                      //       image: AssetImage("assets/images/eminem.png"),
-                      //       fit: BoxFit.fill),
-                      //   borderRadius: BorderRadius.circular(30),
-                      //   color: Colors.white24,
-                      //
+                        borderRadius:  BorderRadius.circular(15),
                        ),
-                      child: QueryArtworkWidget(
-                        id: audioQueryController.songs != null ? audioQueryController.songs[audioQueryController.currentIndex.value].id :null!,
-                        type: ArtworkType.AUDIO,
-                        artworkFit: BoxFit.fill,
-                        nullArtworkWidget: Icon(Icons.music_note, color: Colors.white,size: 200,),
-                      ),
                       // width: size.width * 0.6,
                       // height: size.width * 0.6,
 
-                      alignment: Alignment.bottomCenter,
-                      // child: Image.asset("assets/images/weekndlogo1.jpg",
-                      // fit: BoxFit.contain,
-                      // ),
+                      //alignment: Alignment.bottomCenter,
+                      child: ArtWorkWidget(
+
+                        artworkSize: 500,
+                        audioQueryController: audioQueryController,
+                        index: audioQueryController.currentIndex,
+                      ),
                     ),
                   ),
                   Positioned(
@@ -115,6 +113,7 @@ class SongPage extends StatelessWidget {
                 ],
               ),
               Container(
+                padding: EdgeInsets.symmetric(horizontal: 15),
                 width: double.infinity,
                 height: size.height * 0.15,
                 child: Center(
@@ -122,21 +121,26 @@ class SongPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "The Weeknd",
-                        style: TextStyle(
+                        audioQueryController.currentSongArtist,
+                        style: const TextStyle(
                             color: Colors.white,
                             fontSize: 20,
                             fontWeight: FontWeight.bold),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                      SizedBox(
+
+                      const SizedBox(
                         height: 5,
                       ),
                       Text(
-                        "Save Your Tears",
-                        style: TextStyle(
+                        audioQueryController.currentSongTitle,
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 18,
                         ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ],
                   ),
@@ -169,7 +173,7 @@ class SongPage extends StatelessWidget {
                       Text(
                         audioQueryController
                             .formatTime(audioQueryController.songPosition.value),
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 12,
                         ),
@@ -178,7 +182,7 @@ class SongPage extends StatelessWidget {
                         audioQueryController.formatTime(
                             audioQueryController.songDuration.value -
                                 audioQueryController.songPosition.value),
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 12,
                         ),
@@ -198,11 +202,11 @@ class SongPage extends StatelessWidget {
                           onPressed: () {},
                           iconSize: 20,
                           color: Colors.white,
-                          icon: Icon(FontAwesomeIcons.repeat)),
+                          icon: const Icon(FontAwesomeIcons.repeat)),
                       IconButton(
                           onPressed: () {},
                           color: Colors.white,
-                          icon: Icon(FontAwesomeIcons.backwardStep)),
+                          icon: const Icon(FontAwesomeIcons.backwardStep)),
                       // IconButton(
                       //   iconSize: 35,
                       //   color: Colors.white,
@@ -237,8 +241,8 @@ class SongPage extends StatelessWidget {
                           //buttonController.play();
                         },
                         child: AnimatedContainer(
-                            duration: Duration(milliseconds: 300),
-                            padding: EdgeInsets.all(8),
+                            duration: const Duration(milliseconds: 300),
+                            padding: const EdgeInsets.all(8),
                             height: 47,
                             width: 47,
                             decoration: BoxDecoration(
@@ -248,7 +252,7 @@ class SongPage extends StatelessWidget {
                                   BoxShadow(
                                     blurRadius: 8,
                                     color: audioQueryController.isPlaying.value
-                                        ? Color(0xFFDC5F00)
+                                        ? const Color(0xFFDC5F00)
                                         : Colors.black,
                                   ),
                                 ]),
@@ -256,7 +260,7 @@ class SongPage extends StatelessWidget {
                               audioQueryController.isPlaying.value
                                   ? FontAwesomeIcons.pause
                                   : FontAwesomeIcons.play,
-                              color: Color(0xFFDC5F00),
+                              color: const Color(0xFFDC5F00),
                               size: 18,
                             ),
                           ),
@@ -264,12 +268,12 @@ class SongPage extends StatelessWidget {
                       IconButton(
                           onPressed: () {},
                           color: Colors.white,
-                          icon: Icon(FontAwesomeIcons.forwardStep)),
+                          icon: const Icon(FontAwesomeIcons.forwardStep)),
                       IconButton(
                           iconSize: 20,
                           onPressed: () {},
                           color: Colors.white,
-                          icon: Icon(FontAwesomeIcons.shuffle)),
+                          icon: const Icon(FontAwesomeIcons.shuffle)),
                     ],
                   );
                 }),

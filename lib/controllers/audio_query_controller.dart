@@ -1,5 +1,5 @@
+
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:just_audio/just_audio.dart';
@@ -11,10 +11,12 @@ class OnAudioQueryController extends GetxController{
   AudioPlayer justAudioPlayer = AudioPlayer();
   OnAudioQuery onAudioQuery = OnAudioQuery();
   List<SongModel> songs = [];
-  RxString currentSongTitle = ' '.obs;
-  RxInt currentIndex = 0.obs;
+  String currentSongTitle = ' ';
+  String currentSongArtist = ' ';
+  int currentIndex = 0;
   bool isPlayerViewVisible = false;
   bool isSelectedTile = false;
+  int selectedIndex =0 ;
 
 
   @override
@@ -32,7 +34,7 @@ class OnAudioQueryController extends GetxController{
     justAudioPlayer.playingStream.listen((state) {
       isPlaying.value = state == justAudioPlayer.playing;
     });
-    justAudioPlayer.currentIndexStream.listen((index) {
+    justAudioPlayer.currentIndexStream.listen((index) { // responsible for playing/pausing selected song
       if(index != null){
         updateCurrentPlayingSongDetails(index);
       }
@@ -68,9 +70,11 @@ class OnAudioQueryController extends GetxController{
 
   void updateCurrentPlayingSongDetails (int index){
     if(songs.isNotEmpty){
-      currentSongTitle.value = songs[index].title;
-      currentIndex.value = index;
+      currentSongTitle = songs[index].title;
+      currentSongArtist = songs[index].artist!;
+      currentIndex = index;
     }
+    update();
   }
   ConcatenatingAudioSource createPlayList(List<SongModel> songs) {
     List<AudioSource> sources = [];
@@ -78,10 +82,5 @@ class OnAudioQueryController extends GetxController{
       sources.add(AudioSource.uri(Uri.parse(song.uri!)));
     }
     return ConcatenatingAudioSource(children: sources);
-  }
-
-  void selectedTile(){
-    isSelectedTile = !isSelectedTile;
-    update();
   }
 }

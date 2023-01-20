@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:music_player/controllers/drawer_controller.dart';
-import 'package:music_player/pages/all_songs_page.dart';
+import 'package:music_player/pages/all_songs_page/all_songs_page.dart';
 import 'package:music_player/components/my_drawer.dart';
 
 class NewCustomDrawer extends StatelessWidget {
