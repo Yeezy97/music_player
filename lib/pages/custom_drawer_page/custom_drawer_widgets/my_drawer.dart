@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:music_player/components/play_list_tile.dart';
-import 'package:music_player/constants.dart';
 import 'package:music_player/controllers/drawer_controller.dart';
-import 'package:music_player/pages/song_page.dart';
 
 import 'drawer_tile.dart';
 

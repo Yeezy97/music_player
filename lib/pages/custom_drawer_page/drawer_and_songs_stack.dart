@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:music_player/controllers/drawer_controller.dart';
 import 'package:music_player/pages/all_songs_page/all_songs_page.dart';
-import 'package:music_player/components/my_drawer.dart';
+import 'package:music_player/pages/custom_drawer_page/custom_drawer_widgets/my_drawer.dart';
 
-class NewCustomDrawer extends StatelessWidget {
-  const NewCustomDrawer({Key? key}) : super(key: key);
+class DrawerAndSongsListStack extends StatelessWidget {
+  const DrawerAndSongsListStack({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,28 +18,25 @@ class NewCustomDrawer extends StatelessWidget {
           onHorizontalDragEnd: controller.onDragEnd,
           //onTap: toggle,
           child: AnimatedBuilder(
-            child: AllSongsPage(),
+            child: const AllSongsPage(),
             animation: controller.animationController,
             builder: (BuildContext context, child) {
               double slide = controller.maxSlide * controller.animationController.value;
               print("build complete");
-              //double scale = 1 - (controller.animationController.value * 0.3);
-
               return Stack(
                 children: [
                   MyDrawer(),
                   Transform(
-                      transform: Matrix4.identity()
-                        ..translate(slide),
-                      //..scale(scale),
-                      alignment: Alignment.centerLeft,
-                      child: child,),
+                    transform: Matrix4.identity()
+                      ..translate(slide),
+                    alignment: Alignment.centerLeft,
+                    child: child,),
                 ],
               );
             },
           ),
         ),
       ),
-    );;
+    );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../pages/song_page.dart';
+import '../pages/song_page/song_page.dart';
 
 abstract class DrawerController extends GetxController{
   open();

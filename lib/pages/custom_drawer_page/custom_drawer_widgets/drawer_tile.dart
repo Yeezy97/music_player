@@ -18,7 +18,7 @@ class DrawerTile extends StatelessWidget {
             Icon(tileIcon),
             SizedBox(width: 10,),
             Text(drawerTileText!,
-              style: TextStyle(
+              style: const TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.bold,
                   color: Colors.black45

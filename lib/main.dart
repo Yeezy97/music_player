@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:music_player/components/custom_drawer.dart';
+import 'package:music_player/pages/custom_drawer_page/drawer_and_songs_stack.dart';
 import 'package:get/get.dart';
 import 'package:music_player/controllers/audio_query_controller.dart';
-import 'package:music_player/pages/new_custom_drawer.dart';
-
 
 void main() {
   runApp( MyApp());
@@ -26,7 +24,7 @@ class MyApp extends StatelessWidget {
           accentColor: Colors.grey.withOpacity(0.1),
         ),
       ),
-      home: CustomDrawer(),
+      home: DrawerAndSongsListStack(),
     );
   }
 }
