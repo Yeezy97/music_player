@@ -56,6 +56,7 @@ class AllSongsListView extends StatelessWidget {
               itemCount: audioQueryController.songs.length,
               itemBuilder: (context, index) {
                 //audioQueryController.currentIndex = index;
+                final song = audioQueryController.songs[index];
 
                 return Column(
                   children: [
@@ -138,17 +139,21 @@ class AllSongsListView extends StatelessWidget {
                                   ),
                                   IconButton(
                                       onPressed: () {
-                                        audioQueryController.isFavorite
-                                            ? audioQueryController.favotireSongs
-                                                .add(audioQueryController
-                                                    .songs[index])
-                                            : audioQueryController.favotireSongs
-                                                .removeAt(index); /// condition not complete
+                                        audioQueryController
+                                            .toggleFavorite(song);
+                                        print(audioQueryController
+                                            .favoriteSongs.length);
                                       },
-                                      icon: Icon(
-                                        Icons.favorite_border,
-                                        color: Colors.white,
-                                      )),
+                                      icon: audioQueryController
+                                              .isFavoriteSong(song)
+                                          ? Icon(
+                                              Icons.favorite,
+                                              color: Colors.orange,
+                                            )
+                                          : Icon(
+                                              Icons.favorite_border,
+                                              color: Colors.white,
+                                            )),
                                 ],
                               ),
                             ],

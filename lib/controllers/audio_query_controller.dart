@@ -11,7 +11,7 @@ class OnAudioQueryController extends GetxController{
   AudioPlayer justAudioPlayer = AudioPlayer();
   OnAudioQuery onAudioQuery = OnAudioQuery();
   List<SongModel> songs = [];
-  List<SongModel> favotireSongs = [];
+  List<SongModel> favoriteSongs = [];
   String currentSongTitle = ' ';
   String currentSongArtist = ' ';
   int currentIndex = 0;
@@ -43,6 +43,19 @@ class OnAudioQueryController extends GetxController{
         updateCurrentPlayingSongDetails(index);
       }
     });
+  }
+
+  bool isFavoriteSong(SongModel song){
+    return favoriteSongs.contains(song);
+  }
+
+  void toggleFavorite(SongModel song){
+    if(isFavoriteSong(song)){
+      favoriteSongs.remove(song);
+    }else {
+      favoriteSongs.add(song);
+    }
+    update();
   }
 
   void requestStoragePermission() async{
