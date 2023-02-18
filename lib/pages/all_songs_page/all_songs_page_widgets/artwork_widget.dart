@@ -25,7 +25,7 @@ class ArtWorkWidget extends StatelessWidget {
           .circular(15),
       nullArtworkWidget: Container(
         decoration: BoxDecoration(
-          image: DecorationImage(
+          image: const DecorationImage(
               opacity: 0.4,
               image: AssetImage("assets/images/music_note_background4.png",),
               fit: BoxFit.cover),

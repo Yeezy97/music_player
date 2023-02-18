@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
-import '../controllers/settings_controller.dart';
 
 class SettingsExpansionTile extends StatelessWidget {
-  SettingsExpansionTile({Key? key, required this.tileTitle, required this.tileChildren}) : super(key: key);
+  const SettingsExpansionTile({Key? key, required this.tileTitle, required this.tileChildren}) : super(key: key);
 
   final Widget tileTitle;
   final List<Widget> tileChildren;
@@ -12,7 +9,7 @@ class SettingsExpansionTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         border: Border(
           top: BorderSide(color: Colors.black38),
           bottom: BorderSide(color: Colors.black38),
@@ -25,13 +22,13 @@ class SettingsExpansionTile extends StatelessWidget {
         //color: Color(0xFF145364),
       ),
       child: ExpansionTile(
-        childrenPadding: EdgeInsets.symmetric(horizontal: 10),
-        tilePadding: EdgeInsets.symmetric(horizontal: 10),
-        textColor: Color(0xFFFD703B),
-        iconColor: Color(0xFFFD703B),
+        childrenPadding: const EdgeInsets.symmetric(horizontal: 10),
+        tilePadding: const EdgeInsets.symmetric(horizontal: 10),
+        textColor: const Color(0xFFFD703B),
+        iconColor: const Color(0xFFFD703B),
         collapsedTextColor: Colors.white,
         collapsedIconColor: Colors.white,
-        collapsedBackgroundColor: Color(0xFF3C2A21),
+        collapsedBackgroundColor: const Color(0xFF3C2A21),
 
         //backgroundColor: Colors.blueGrey,
         title:tileTitle,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:music_player/components/play_and_pause_button.dart';
 import 'package:music_player/controllers/audio_query_controller.dart';
 
 class PlaybackButtons extends StatelessWidget {
@@ -66,6 +67,7 @@ class PlaybackButtons extends StatelessWidget {
                 ),
               ),
             ),
+            //PlayAndPauseButton(audioQueryController: audioQueryController),
             IconButton(
                 onPressed: () {},
                 color: Colors.white,

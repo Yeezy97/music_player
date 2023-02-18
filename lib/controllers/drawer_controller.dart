@@ -48,9 +48,11 @@ class DrawerControllerImp extends DrawerController with GetSingleTickerProviderS
    }
  }
 
- void onDragEnd(DragEndDetails details) {
-   if (animationController.isDismissed || animationController.isCompleted)
+ @override
+  void onDragEnd(DragEndDetails details) {
+   if (animationController.isDismissed || animationController.isCompleted) {
      return;
+   }
    if (details.velocity.pixelsPerSecond.dx.abs() >= 365.0) {
      double visualVelocity = details.velocity.pixelsPerSecond.dx /
          Get.size.width;

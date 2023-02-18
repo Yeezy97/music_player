@@ -37,6 +37,7 @@ class SettingsPage extends StatelessWidget {
                           value: settingsController.isFadingOn,
                           onChanged: (bool) {
                             settingsController.fadingSwitch();
+
                           },
                         ),
                       );

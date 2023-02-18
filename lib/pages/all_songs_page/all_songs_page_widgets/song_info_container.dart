@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:music_player/controllers/audio_query_controller.dart';
+import 'package:music_player/controllers/selected_index_controller.dart';
 import 'package:music_player/pages/all_songs_page/all_songs_page_widgets/artwork_widget.dart';
 import 'package:music_player/pages/song_page/song_page.dart';
 
@@ -9,10 +10,12 @@ class SongInfoContainer extends StatelessWidget {
     Key? key,
     required this.size,
     required this.audioQueryController,
+    // required this.selectedIndexController,
   }) : super(key: key);
 
   final Size size;
   final OnAudioQueryController audioQueryController;
+  // final SelectedIndexController selectedIndexController;
 
   @override
   Widget build(BuildContext context) {

@@ -25,7 +25,7 @@ class DrawerAndSongsListStack extends StatelessWidget {
               print("build complete");
               return Stack(
                 children: [
-                  MyDrawer(),
+                  const MyDrawer(),
                   Transform(
                     transform: Matrix4.identity()
                       ..translate(slide),

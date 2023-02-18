@@ -14,14 +14,13 @@ class AllSongsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SelectedIndexController selectedIndexController =
-    Get.put(SelectedIndexController());
     OnAudioQueryController audioQueryController =
     Get.put(OnAudioQueryController());
     Size size = MediaQuery
         .of(context)
         .size;
     DrawerControllerImp drawerControllerImp = Get.put(DrawerControllerImp());
+    SelectedIndexController selectedIndexController = Get.put(SelectedIndexController());
 
     return Scaffold(
       appBar: PreferredSize(
@@ -31,22 +30,25 @@ class AllSongsPage extends StatelessWidget {
         children: [
           Container(
             decoration: BoxDecoration(
-              color: Colors.black.withOpacity(0.8),
+              //color: Color(0xffE8E2E2),
+              color: Theme.of(context).primaryColorLight,
+              //color: Colors.black.withOpacity(0.8),
               image: const DecorationImage(
                   opacity: 0.1,
                   image: AssetImage("assets/images/music_note_background4.png"),
                   fit: BoxFit.cover),
             ),
-            child: AllSongsListView(audioQueryController: audioQueryController, size: size, selectedIndexController: selectedIndexController),
+            child: AllSongsListView( size: size,),
           ),
           Positioned(
             bottom: 0,
             right: 0,
             left: 0,
             child: Container(
-              decoration: const BoxDecoration(
-                  color: Color(0xFF181818),
-                  borderRadius: BorderRadius.only(
+              decoration:  BoxDecoration(
+                  //color: Color(0xFF181818),
+                color: Theme.of(context).primaryColorLight,
+                  borderRadius: const BorderRadius.only(
                       topRight: Radius.circular(10),
                       topLeft: Radius.circular(10))),
               height: 70,
@@ -58,18 +60,23 @@ class AllSongsPage extends StatelessWidget {
                     width: size.width * 0.03,
                   ),
                   IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
+                      onPressed: () {
+                        audioQueryController.justAudioPlayer.seekToPrevious();
+                      },
+                      icon:  const Icon(
                         FontAwesomeIcons.backwardStep,
-                        color: Colors.white,
+                        //color: Theme.of(context).iconTheme.color,
                         size: 18,
                       )),
                   PlayAndPauseButton(audioQueryController: audioQueryController),
                   IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
+                      onPressed: () {
+                        audioQueryController.justAudioPlayer.seekToNext();
+                        // selectedIndexController.updateIndex(audioQueryController.currentIndex);
+                      },
+                      icon:  const Icon(
                         FontAwesomeIcons.forwardStep,
-                        color: Colors.white,
+                        //color: Theme.of(context).iconTheme.color,
                         size: 18,
                       )),
                 ],

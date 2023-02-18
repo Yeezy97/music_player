@@ -17,7 +17,6 @@ class SongPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     OnAudioQueryController audioQueryController = Get.put(OnAudioQueryController());
-    SongButtonControllerImp buttonController = Get.put(SongButtonControllerImp());
 
     Size size = MediaQuery.of(context).size;
     return Scaffold(

@@ -5,6 +5,7 @@ class SettingsController extends GetxController{
   // bool isSwitchedOn = true;
    bool isGaplessOn = true;
    bool isResumeAfterCallOn = true;
+   bool isLightMode = false;
 
 
   void fadingSwitch() {
@@ -17,6 +18,10 @@ class SettingsController extends GetxController{
   }
   void resumeAfterCallSwitch() {
     isResumeAfterCallOn = !isResumeAfterCallOn;
+    update();
+  }
+  void lightModeSwitch(){
+    isLightMode = !isLightMode;
     update();
   }
 

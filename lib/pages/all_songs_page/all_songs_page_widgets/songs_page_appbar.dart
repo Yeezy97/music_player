@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../controllers/drawer_controller.dart';
-import '../../settings_page.dart';
+import '../../settings_page/settings_page.dart';
 
 class SongsPageAppBar extends StatelessWidget {
   const SongsPageAppBar({
@@ -19,8 +19,9 @@ class SongsPageAppBar extends StatelessWidget {
         padding: const EdgeInsets.only(left: 20),
         child: MaterialButton(
           shape: const CircleBorder(),
+          color: Theme.of(context).primaryColor,
           //color: Color(0xFFE0DCCE),
-          color: const Color(0xFF010101),
+          //color: const Color(0xFF010101),
           minWidth: 35,
           enableFeedback: false,
           padding: const EdgeInsets.all(3),
@@ -43,7 +44,7 @@ class SongsPageAppBar extends StatelessWidget {
         ),
       ),
       elevation: 0,
-      backgroundColor: const Color(0xFF181818),
+      backgroundColor: Theme.of(context).primaryColorLight,
       actions: [
         GestureDetector(
           // search button
@@ -52,7 +53,7 @@ class SongsPageAppBar extends StatelessWidget {
             color: Colors.transparent,
             width: 40,
             height: 40,
-            child: const Icon(Icons.search),
+            child:  Icon(Icons.search, color: Theme.of(context).iconTheme.color,),
           ),
           onTap: () {},
         ),
@@ -63,7 +64,7 @@ class SongsPageAppBar extends StatelessWidget {
             color: Colors.transparent,
             width: 40,
             height: 40,
-            child: const Icon(Icons.settings),
+            child: Icon(Icons.settings, color: Theme.of(context).iconTheme.color,),
           ),
           onTap: () {
             Get.to(() => const SettingsPage());

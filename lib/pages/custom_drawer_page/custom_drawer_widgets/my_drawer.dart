@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:music_player/components/play_list_tile.dart';
 import 'package:music_player/controllers/drawer_controller.dart';
+import 'package:music_player/controllers/settings_controller.dart';
+import 'package:music_player/controllers/theme_controller.dart';
+import 'package:music_player/pages/settings_page/settings_page.dart';
 
 import 'drawer_tile.dart';
 
@@ -10,13 +13,17 @@ class MyDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SettingsController settingsController = Get.put(SettingsController());
     DrawerControllerImp drawerController = Get.put(DrawerControllerImp());
-    Size size = MediaQuery.of(context).size;
+    ThemeController themeController = Get.put(ThemeController());
+    Size size = MediaQuery
+        .of(context)
+        .size;
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
         //color: Color(0xFFFAF9F6),
-         //color: Colors.black,
+        //color: Colors.black,
         //gradient: vividYellowGradientColor,
         gradient: LinearGradient(
             begin: Alignment.centerLeft,
@@ -24,7 +31,7 @@ class MyDrawer extends StatelessWidget {
             colors: [
 
               //Color(0xFFFAF9F6),
-            Color(0x91CBC1BA),
+              Color(0x91CBC1BA),
               //Colors.black,
               //Color(0xFF246EE9), // royal blue
               //Color(0xFFFF2400), //  scarlet red
@@ -55,13 +62,16 @@ class MyDrawer extends StatelessWidget {
               height: size.height * 0.7,
               child: ListView(
                 children: [
-                  DrawerTile(tileIcon: Icons.music_note, drawerTileText: "All Songs"),
+                  const DrawerTile(
+                      tileIcon: Icons.music_note, drawerTileText: "All Songs"),
                   DrawerTile(
-                      tileIcon: Icons.play_arrow_outlined, drawerTileText:"Current Song",
-                  ontap:(){
-                        drawerController.goToMusicScreen();
-                  },
+                    tileIcon: Icons.play_arrow_outlined,
+                    drawerTileText: "Current Song",
+                    ontap: () {
+                      drawerController.goToMusicScreen();
+                    },
                   ),
+                  DrawerTile(tileIcon: Icons.favorite, drawerTileText: "Favorites"),
                   ExpansionTile(
                     title: Row(
                       children: [
@@ -82,8 +92,25 @@ class MyDrawer extends StatelessWidget {
                       PlayListTile(tileText: "Jazz"),
                     ],
                   ),
-                  DrawerTile(tileIcon: Icons.settings, drawerTileText: "Settings"),
-                  DrawerTile(tileIcon: Icons.brush, drawerTileText: "Themes")
+                  DrawerTile(
+                    ontap: (){
+                      Get.to(SettingsPage());
+                    },
+                      tileIcon: Icons.settings, drawerTileText: "Settings"),
+                  DrawerTile(tileIcon: Icons.brush, drawerTileText: "Themes"),
+                  GetBuilder<ThemeController>(builder: (_) {
+                    return DrawerTile(ontap: () {
+                      // settingsController.lightModeSwitch();
+                      themeController.changeTheme();
+                    },
+                      tileIcon: Icons.light_mode,
+                      drawerTileText: "Light Mode",
+                      trailingWidget: Switch.adaptive(
+                          value: themeController.lightMode,
+                          onChanged: (_) {
+                            themeController.changeTheme();
+                          }),);
+                  })
                 ],
               ),
             )

@@ -13,18 +13,17 @@ class PlayAndPauseButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () async {
-        if (audioQueryController.isPlaying.value == true) {
-          await audioQueryController.justAudioPlayer.pause();
-        } else {
-          await audioQueryController.justAudioPlayer.play();
-          audioQueryController.isPlaying.value =
-          !audioQueryController.isPlaying.value;
-        }
-      },
-      child: Obx(() {
-        return AnimatedContainer(
+    return Obx(() {
+      return GestureDetector(
+        onTap: ()  {
+          if (audioQueryController.isPlaying.value == true) {
+             audioQueryController.justAudioPlayer.pause();
+          } else {
+             audioQueryController.justAudioPlayer.play();
+          }
+          audioQueryController.isPlaying.value = !audioQueryController.isPlaying.value; /// fix this shit
+        },
+        child: AnimatedContainer(
           duration: const Duration(milliseconds: 300),
           padding: const EdgeInsets.all(8),
           height: 47,
@@ -41,15 +40,16 @@ class PlayAndPauseButton extends StatelessWidget {
                 ),
               ]),
           child: Icon(
+            // audioQueryController.isPlaying.value
             audioQueryController.isPlaying.value
                 ? FontAwesomeIcons.pause
                 : FontAwesomeIcons.play,
             color: const Color(0xFFDC5F00),
             size: 18,
           ),
-        );
-      }),
-    );
+        ),
+      );
+    });
   }
 }
 

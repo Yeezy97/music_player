@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 const TextStyle settingsExpTileTextStyle = TextStyle(
     fontWeight: FontWeight.bold,
   );
 
 
-LinearGradient customGradientColor = LinearGradient(begin: Alignment.topLeft, end: Alignment.bottomRight, colors: <Color>[
+LinearGradient customGradientColor = const LinearGradient(begin: Alignment.topLeft, end: Alignment.bottomRight, colors: <Color>[
   Color(0xFFF551F9),
   Color(0xFF5C76FF),
 ]);
 
-LinearGradient drawerGradientColor = LinearGradient(
+LinearGradient drawerGradientColor = const LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
     colors: [
@@ -27,7 +28,7 @@ LinearGradient drawerGradientColor = LinearGradient(
     ]
 );
 
-LinearGradient settingsGradientColor = LinearGradient(
+LinearGradient settingsGradientColor = const LinearGradient(
   begin: Alignment.topLeft,
     end: Alignment.bottomRight,
     colors:[
@@ -39,7 +40,7 @@ LinearGradient settingsGradientColor = LinearGradient(
 
 
 
-LinearGradient vividYellowGradientColor = LinearGradient(
+LinearGradient vividYellowGradientColor = const LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.centerRight,
     tileMode: TileMode.clamp,
@@ -64,4 +65,51 @@ LinearGradient vividYellowGradientColor = LinearGradient(
       //Colors.white54,
     ]);
 
+ThemeData lightTheme = ThemeData(
+  scrollbarTheme: const ScrollbarThemeData(
+    thumbColor: MaterialStatePropertyAll(Color(0xFFDC5F00)),
+
+  ),
+  iconTheme: const IconThemeData(
+    color: Colors.black
+  ),
+  textTheme: GoogleFonts.sourceSansProTextTheme(
+    Typography.blackHelsinki,
+  ).copyWith(
+    displaySmall: const TextStyle(
+      color: Colors.black,
+      fontSize: 10,
+    ),
+  ),
+  colorScheme: ColorScheme.fromSwatch(
+    accentColor: Colors.grey.withOpacity(0.1),
+  ),
+  primaryColor:  Colors.white,
+  secondaryHeaderColor:  Colors.black,
+  primaryColorLight: const Color(0xffF5F5F5),
+);
+
+ThemeData darkTheme = ThemeData(
+  scrollbarTheme: const ScrollbarThemeData(
+    thumbColor: MaterialStatePropertyAll(Color(0xFF857F7F)),
+
+  ),
+  iconTheme: const IconThemeData(
+    color:  Colors.white,
+  ),
+  textTheme: GoogleFonts.sourceSansProTextTheme(
+     Typography.whiteHelsinki,
+  ).copyWith(
+    displaySmall: const TextStyle(
+      color:  Colors.white,
+      fontSize: 10,
+    )
+  ),
+  colorScheme: ColorScheme.fromSwatch(
+    accentColor: Colors.grey.withOpacity(0.1),
+  ),
+  primaryColor: const Color(0xFF181818),
+  secondaryHeaderColor:  Colors.white,
+  primaryColorLight:  Colors.black,
+);
 

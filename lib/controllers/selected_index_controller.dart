@@ -1,10 +1,8 @@
 import 'package:get/get.dart';
 
 class SelectedIndexController extends GetxController{
-  int selectedIndex = 0;
+  RxInt selectedIndex = 0.obs;
   updateIndex(int newIndex){
-    selectedIndex = newIndex;
-    update();
+    selectedIndex.value = newIndex;
   }
-
 }

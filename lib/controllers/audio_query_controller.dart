@@ -11,13 +11,14 @@ class OnAudioQueryController extends GetxController{
   AudioPlayer justAudioPlayer = AudioPlayer();
   OnAudioQuery onAudioQuery = OnAudioQuery();
   List<SongModel> songs = [];
+  List<SongModel> favotireSongs = [];
   String currentSongTitle = ' ';
   String currentSongArtist = ' ';
   int currentIndex = 0;
   bool isPlayerViewVisible = false;
   bool isSelectedTile = false;
-  int selectedIndex =0 ;
-
+  bool isFavorite = false;
+  //int selectedIndex =0 ;
 
   @override
   void onInit() {
@@ -31,19 +32,17 @@ class OnAudioQueryController extends GetxController{
     justAudioPlayer.positionStream.listen((newPosition) {
       songPosition.value = newPosition;
     });
-    justAudioPlayer.playingStream.listen((state) {
-      isPlaying.value = state == justAudioPlayer.playing;
-    });
+
+    isPlaying.value = justAudioPlayer.playing; /// dont forget this fuckn shit
+
+    // justAudioPlayer.playingStream.listen((state) {
+    //   isPlaying.value  = state ;
+    // });
     justAudioPlayer.currentIndexStream.listen((index) { // responsible for playing/pausing selected song
       if(index != null){
         updateCurrentPlayingSongDetails(index);
       }
     });
-  }
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
   }
 
   void requestStoragePermission() async{

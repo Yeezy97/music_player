@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
 class DrawerTile extends StatelessWidget {
-  const DrawerTile({Key? key,required this.tileIcon,required this.drawerTileText, this.ontap}) : super(key: key);
+  const DrawerTile({Key? key,required this.tileIcon,required this.drawerTileText, this.ontap, this.trailingWidget}) : super(key: key);
 
   final IconData tileIcon;
   final String? drawerTileText;
   final Function()? ontap;
+  final Widget? trailingWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,8 @@ class DrawerTile extends StatelessWidget {
               ),
             )
           ],
-        )
+        ),
+        trailing: trailingWidget,
     );
   }
 }
