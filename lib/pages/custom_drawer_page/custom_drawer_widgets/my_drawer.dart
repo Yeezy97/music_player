@@ -29,7 +29,6 @@ class MyDrawer extends StatelessWidget {
             begin: Alignment.centerLeft,
             end: Alignment.centerRight,
             colors: [
-
               //Color(0xFFFAF9F6),
               Color(0x91CBC1BA),
               //Colors.black,
