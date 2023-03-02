@@ -26,32 +26,6 @@ class MyApp extends StatelessWidget {
         themeMode: ThemeMode.dark,
         theme: lightTheme,
         darkTheme: darkTheme,
-        // theme: ThemeData(
-        //   iconTheme: IconThemeData(
-        //     color: settingsController.isLightMode ? Colors.black : Colors.white,
-        //   ),
-        //   textTheme: GoogleFonts.sourceSansProTextTheme(
-        //     settingsController.isLightMode ? Typography.blackHelsinki : Typography.whiteHelsinki,
-        //   ).copyWith(
-        //     displaySmall: TextStyle(
-        //       color: settingsController.isLightMode ? Colors.black : Colors.white,
-        //       fontSize: 10,
-        //     )
-        //   ),
-        //   // brightness: settingsController.isLightMode
-        //   //     ? Brightness.dark
-        //   //     : Brightness.light,
-        //
-        //   colorScheme: ColorScheme.fromSwatch(
-        //     accentColor: Colors.grey.withOpacity(0.1),
-        //   ),
-        //   primaryColor: settingsController.isLightMode
-        //       ? Colors.white
-        //       : const Color(0xFF181818),
-        //   secondaryHeaderColor: settingsController.isLightMode ? Colors.black : Colors.white,
-        //   primaryColorLight: settingsController.isLightMode ? const Color(
-        //       0xffF5F5F5) : Colors.black,
-        // ),
         home: DrawerAndSongsListStack(),
       );
 
