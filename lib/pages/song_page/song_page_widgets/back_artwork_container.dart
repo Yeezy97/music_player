@@ -23,9 +23,17 @@ class BackArtworkContainer extends StatelessWidget {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                Colors.white.withOpacity(0.7),
-                Colors.white.withOpacity(0.6),
-                Colors.white.withOpacity(0.5),
+                Colors.white70.withOpacity(0.8),
+                Colors.white70.withOpacity(0.7),
+                Colors.white70.withOpacity(0.6),
+                Colors.white70.withOpacity(0.5),
+                Colors.white70.withOpacity(0.4),
+                Colors.white70.withOpacity(0.3),
+                Colors.white70.withOpacity(0.2),
+                Colors.white70.withOpacity(0.1),
+                Colors.white70.withOpacity(0.05),
+                Colors.white70.withOpacity(0.025),
+                Colors.white70.withOpacity(0.010),
                 Colors.transparent,
               ]).createShader(bounds);
         },
@@ -33,7 +41,7 @@ class BackArtworkContainer extends StatelessWidget {
           width: size.width,
           height: size.height * 0.5,
           child: ArtWorkWidget(
-            artworkSize: 400,audioQueryController: audioQueryController, index: audioQueryController.currentIndex,
+            artworkSize: 1000,audioQueryController: audioQueryController, index: audioQueryController.currentIndex,
           ),
           // child: QueryArtworkWidget(
           //   id: audioQueryController.songs != null ? audioQueryController.songs[audioQueryController.currentIndex].id :null!,

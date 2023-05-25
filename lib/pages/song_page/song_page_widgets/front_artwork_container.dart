@@ -40,7 +40,6 @@ class FrontArtworkContainer extends StatelessWidget {
 
         //alignment: Alignment.bottomCenter,
         child: ArtWorkWidget(
-
           artworkSize: 500,
           audioQueryController: audioQueryController,
           index: audioQueryController.currentIndex,

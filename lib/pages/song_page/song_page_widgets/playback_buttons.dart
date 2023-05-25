@@ -25,12 +25,10 @@ class PlaybackButtons extends StatelessWidget {
           children: [
             IconButton(
                 onPressed: () {},
-                iconSize: 20,
-                color: Colors.white,
+                iconSize: 18,
                 icon: const Icon(FontAwesomeIcons.repeat)),
             IconButton(
                 onPressed: () {},
-                color: Colors.white,
                 icon: const Icon(FontAwesomeIcons.backwardStep)),
             GestureDetector(
               onTap: () async {
@@ -52,17 +50,17 @@ class PlaybackButtons extends StatelessWidget {
                     shape: BoxShape.circle,
                     boxShadow: [
                       BoxShadow(
-                        blurRadius: 8,
+                        blurRadius: 6,
                         color: audioQueryController.isPlaying.value
-                            ? const Color(0xFFDC5F00)
-                            : Colors.black,
+                            ? Theme.of(context).secondaryHeaderColor
+                            : Colors.black45,
                       ),
                     ]),
                 child: Icon(
                   audioQueryController.isPlaying.value
                       ? FontAwesomeIcons.pause
                       : FontAwesomeIcons.play,
-                  color: const Color(0xFFDC5F00),
+                  color: Theme.of(context).secondaryHeaderColor,
                   size: 18,
                 ),
               ),
@@ -70,12 +68,12 @@ class PlaybackButtons extends StatelessWidget {
             //PlayAndPauseButton(audioQueryController: audioQueryController),
             IconButton(
                 onPressed: () {},
-                color: Colors.white,
+                //color: Theme.of(context).secondaryHeaderColor,
                 icon: const Icon(FontAwesomeIcons.forwardStep)),
             IconButton(
                 iconSize: 20,
                 onPressed: () {},
-                color: Colors.white,
+                //color: Theme.of(context).secondaryHeaderColor,
                 icon: const Icon(FontAwesomeIcons.shuffle)),
           ],
         );

@@ -24,8 +24,8 @@ class CurrentSongInfo extends StatelessWidget {
           children: [
             Text(
               audioQueryController.currentSongArtist,
-              style: const TextStyle(
-                  color: Colors.white,
+              style: TextStyle(
+                  color: Theme.of(context).primaryColor,
                   fontSize: 20,
                   fontWeight: FontWeight.bold),
               maxLines: 1,
@@ -37,8 +37,8 @@ class CurrentSongInfo extends StatelessWidget {
             ),
             Text(
               audioQueryController.currentSongTitle,
-              style: const TextStyle(
-                color: Colors.white,
+              style:  TextStyle(
+                color: Theme.of(context).primaryColor,
                 fontSize: 18,
               ),
               maxLines: 1,

@@ -21,15 +21,13 @@ class ArtWorkWidget extends StatelessWidget {
       type: ArtworkType.AUDIO,
       artworkFit: BoxFit.fill,
       size: artworkSize,
-      artworkBorder: BorderRadius
-          .circular(15),
+      artworkBorder: BorderRadius.zero,
       nullArtworkWidget: Container(
-        decoration: BoxDecoration(
-          image: const DecorationImage(
-              opacity: 0.4,
-              image: AssetImage("assets/images/music_note_background4.png",),
-              fit: BoxFit.cover),
-          borderRadius: BorderRadius.circular(15),
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+              opacity: 0.9,
+              image: AssetImage("assets/images/background_logo.png",),
+              fit: BoxFit.fill),
         ),
       ),
       // const Icon(

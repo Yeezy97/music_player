@@ -33,10 +33,11 @@ class PlayAndPauseButton extends StatelessWidget {
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
-                  blurRadius: 10,
+                  blurRadius: 6,
                   color: audioQueryController.isPlaying.value
-                      ? const Color(0xFFDC5F00)
-                      : Colors.black,
+                      ? Theme.of(context).secondaryHeaderColor
+                  //Color(0xFFDC5F00)
+                      : Colors.black45,
                 ),
               ]),
           child: Icon(
@@ -44,7 +45,8 @@ class PlayAndPauseButton extends StatelessWidget {
             audioQueryController.isPlaying.value
                 ? FontAwesomeIcons.pause
                 : FontAwesomeIcons.play,
-            color: const Color(0xFFDC5F00),
+            color: Theme.of(context).secondaryHeaderColor,
+            //Color(0xFFDC5F00),
             size: 18,
           ),
         ),

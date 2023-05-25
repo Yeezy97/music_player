@@ -22,13 +22,14 @@ class SongPage extends StatelessWidget {
     return Scaffold(
       body: Container(
         width: double.infinity,
-        decoration: const BoxDecoration(
+        decoration:   BoxDecoration(
           gradient: LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.bottomRight,
+              begin: Alignment.bottomCenter,
+              end: Alignment.topCenter,
               colors: [
-                Colors.black,
-                Color(0xFF181818),
+                Theme.of(context).cardColor,
+                Theme.of(context).primaryColorLight,
+
               ]),
         ),
         child: SafeArea(

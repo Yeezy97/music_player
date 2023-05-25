@@ -31,13 +31,14 @@ class SongInfoContainer extends StatelessWidget {
               vertical: 4, horizontal: 5),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            gradient: const LinearGradient(
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-                colors: [
-                  Colors.black,
-                  Color(0xFF181818),
-                ]),
+            color: Theme.of(context).cardColor,
+            // gradient: const LinearGradient(
+            //     begin: Alignment.centerLeft,
+            //     end: Alignment.centerRight,
+            //     colors:  [
+            //       Color(0xFF181818),
+            //       Colors.black
+            //     ]),
           ),
           height: 60,
           width: size.width * 0.48,
@@ -50,9 +51,9 @@ class SongInfoContainer extends StatelessWidget {
                 decoration: BoxDecoration(
                   boxShadow: const [
                     BoxShadow(
-                        offset: Offset(5, 5),
+                        offset: Offset(3, 2),
                         blurRadius: 5,
-                        color: Colors.black45)
+                        color: Colors.black54)
                   ],
                   borderRadius: BorderRadius.circular(10),
                 ),
@@ -77,8 +78,9 @@ class SongInfoContainer extends StatelessWidget {
                         builder: (logic) {
                           return Text(
                             audioQueryController.currentSongTitle,
-                            style: const TextStyle(
-                              color: Color(0xFFDC5F00),
+                            style: TextStyle(
+                              //color: Color(0xFFDC5F00),
+                              color: Theme.of(context).primaryColor,
                             ),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
@@ -89,8 +91,9 @@ class SongInfoContainer extends StatelessWidget {
                           return Text(
                             audioQueryController
                                 .currentSongArtist,
-                            style: const TextStyle(
-                              color: Color(0xFFDC5F00),
+                            style: TextStyle(
+                              // color: Color(0xFFDC5F00),
+                              color: Theme.of(context).primaryColor,
                             ),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,

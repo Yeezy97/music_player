@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:music_player/components/play_and_pause_button.dart';
 import 'package:music_player/controllers/audio_query_controller.dart';
 import 'package:music_player/controllers/selected_index_controller.dart';
+import 'package:music_player/controllers/theme_controller.dart';
 import 'package:music_player/pages/all_songs_page/all_songs_page_widgets/all_songs_listview.dart';
 import 'package:music_player/pages/all_songs_page/all_songs_page_widgets/song_info_container.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -14,6 +15,7 @@ class AllSongsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeController themeController = Get.put(ThemeController());
     OnAudioQueryController audioQueryController =
     Get.put(OnAudioQueryController());
     Size size = MediaQuery
@@ -23,6 +25,7 @@ class AllSongsPage extends StatelessWidget {
     SelectedIndexController selectedIndexController = Get.put(SelectedIndexController());
 
     return Scaffold(
+      backgroundColor: Theme.of(context).primaryColorLight,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
           child: SongsPageAppBar(drawerControllerImp: drawerControllerImp,)),
@@ -31,11 +34,11 @@ class AllSongsPage extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               //color: Color(0xffE8E2E2),
-              color: Theme.of(context).primaryColorLight,
-              //color: Colors.black.withOpacity(0.8),
-              image: const DecorationImage(
-                  opacity: 0.1,
-                  image: AssetImage("assets/images/music_note_background4.png"),
+              //color: Theme.of(context).primaryColorLight,
+              //color: Colors.black.withOpacity(0.9),
+              image:  DecorationImage(
+                  opacity: themeController.lightMode ? 0.15 : 0.15,
+                  image: AssetImage("assets/images/long_background.png"),
                   fit: BoxFit.cover),
             ),
             child: AllSongsListView( size: size,),
@@ -47,7 +50,7 @@ class AllSongsPage extends StatelessWidget {
             child: Container(
               decoration:  BoxDecoration(
                   //color: Color(0xFF181818),
-                color: Theme.of(context).primaryColorLight,
+                color: Theme.of(context).cardColor,
                   borderRadius: const BorderRadius.only(
                       topRight: Radius.circular(10),
                       topLeft: Radius.circular(10))),

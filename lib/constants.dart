@@ -71,7 +71,7 @@ ThemeData lightTheme = ThemeData(
 
   ),
   iconTheme: const IconThemeData(
-    color: Colors.black
+    color: Color(0xFF495464),
   ),
   textTheme: GoogleFonts.sourceSansProTextTheme(
     Typography.blackHelsinki,
@@ -84,9 +84,12 @@ ThemeData lightTheme = ThemeData(
   colorScheme: ColorScheme.fromSwatch(
     accentColor: Colors.grey.withOpacity(0.1),
   ),
-  primaryColor:  Colors.white,
-  secondaryHeaderColor:  Colors.black,
-  primaryColorLight: const Color(0xffF5F5F5),
+  // primaryColor:  Color(0xFFA6A6A6),
+  primaryColor:  Color(0xFF232322),
+  secondaryHeaderColor:  Color(0xFF2B3467),
+  primaryColorLight: const Color(0xffffffff),
+  primaryColorDark: Colors.black87,
+  cardColor: const Color(0xFFF1F1F1),
 );
 
 ThemeData darkTheme = ThemeData(
@@ -108,8 +111,12 @@ ThemeData darkTheme = ThemeData(
   colorScheme: ColorScheme.fromSwatch(
     accentColor: Colors.grey.withOpacity(0.1),
   ),
-  primaryColor: const Color(0xFF181818),
-  secondaryHeaderColor:  Colors.white,
-  primaryColorLight:  Colors.black,
-);
 
+  primaryColor: Colors.white, /// general text color
+  secondaryHeaderColor:  const Color(0xFF46C2CB), /// playback buttons and played song
+   // primaryColorLight:  Colors.black,
+   primaryColorLight:  const Color(0xFF000813), /// background color on playlist
+   primaryColorDark: Colors.black87, /// playlist background with opacity
+  // cardColor: const Color(0xFF1F1F1F),
+  cardColor: const Color(0xFF262A56), /// appbar and bottom bar colors
+);

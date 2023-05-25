@@ -23,8 +23,8 @@ class SongTimeAndPosition extends StatelessWidget {
             Text(
               audioQueryController
                   .formatTime(audioQueryController.songPosition.value),
-              style: const TextStyle(
-                color: Colors.white,
+              style:  TextStyle(
+                color: Theme.of(context).primaryColor,
                 fontSize: 12,
               ),
             ),
@@ -32,8 +32,8 @@ class SongTimeAndPosition extends StatelessWidget {
               audioQueryController.formatTime(
                   audioQueryController.songDuration.value -
                       audioQueryController.songPosition.value),
-              style: const TextStyle(
-                color: Colors.white,
+              style:  TextStyle(
+                color: Theme.of(context).primaryColor,
                 fontSize: 12,
               ),
             ),

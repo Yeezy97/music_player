@@ -22,21 +22,22 @@ class MyDrawer extends StatelessWidget {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
+        color: Colors.white
         //color: Color(0xFFFAF9F6),
         //color: Colors.black,
         //gradient: vividYellowGradientColor,
-        gradient: LinearGradient(
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
-            colors: [
-              //Color(0xFFFAF9F6),
-              Color(0x91CBC1BA),
-              //Colors.black,
-              //Color(0xFF246EE9), // royal blue
-              //Color(0xFFFF2400), //  scarlet red
-              //Color(0xFF0C3365), // dark blue
-              Colors.white24
-            ]),
+        // gradient: LinearGradient(
+        //     begin: Alignment.centerLeft,
+        //     end: Alignment.centerRight,
+        //     colors: [
+        //       //Color(0xFFFAF9F6),
+        //       Color(0x91CBC1BA),
+        //       //Colors.black,
+        //       //Color(0xFF246EE9), // royal blue
+        //       //Color(0xFFFF2400), //  scarlet red
+        //       //Color(0xFF0C3365), // dark blue
+        //       Colors.white24
+        //     ]),
       ),
       child: SafeArea(
         child: Column(

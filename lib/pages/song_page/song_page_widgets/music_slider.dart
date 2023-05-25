@@ -15,8 +15,8 @@ class MusicSlider extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() {
       return Slider(
-          activeColor: Color(0xFFEC4426),
-          inactiveColor: Color(0xFFD9CFCE),
+          activeColor: Theme.of(context).secondaryHeaderColor,
+          inactiveColor: Theme.of(context).primaryColorLight,
           autofocus: true,
           thumbColor: Colors.white,
           min: 0,
