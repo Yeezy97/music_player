@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:music_player/components/settings_expansion_tile.dart';
 import 'package:music_player/components/settings_list_tile.dart';
 import 'package:music_player/constants.dart';
+import 'package:music_player/controllers/audio_query_controller.dart';
 import 'package:music_player/controllers/settings_controller.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -11,6 +12,7 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    OnAudioQueryController audioQueryController = Get.put(OnAudioQueryController());
     SettingsController settingsController = Get.put(SettingsController());
     return Container(
       decoration: BoxDecoration(
@@ -37,7 +39,7 @@ class SettingsPage extends StatelessWidget {
                           value: settingsController.isFadingOn,
                           onChanged: (bool) {
                             settingsController.fadingSwitch();
-
+                            audioQueryController.justAudioPlayer.setSkipSilenceEnabled(settingsController.isFadingOn);
                           },
                         ),
                       );

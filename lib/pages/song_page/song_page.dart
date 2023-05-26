@@ -16,19 +16,26 @@ class SongPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    OnAudioQueryController audioQueryController = Get.put(OnAudioQueryController());
+    OnAudioQueryController audioQueryController = Get.put(
+        OnAudioQueryController());
 
-    Size size = MediaQuery.of(context).size;
+    Size size = MediaQuery
+        .of(context)
+        .size;
     return Scaffold(
       body: Container(
         width: double.infinity,
-        decoration:   BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.bottomCenter,
               end: Alignment.topCenter,
               colors: [
-                Theme.of(context).cardColor,
-                Theme.of(context).primaryColorLight,
+                Theme
+                    .of(context)
+                    .cardColor,
+                Theme
+                    .of(context)
+                    .primaryColorLight,
 
               ]),
         ),
@@ -36,26 +43,34 @@ class SongPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Stack(
-                children: [
-                  BackArtworkContainer(size: size, audioQueryController: audioQueryController),
-                  FrontArtworkContainer(size: size, audioQueryController: audioQueryController),
-                  Positioned(
-                    top: 20,
-                    left: 20,
-                    child: IconButton(
-                        color: Colors.white70,
-                        onPressed: () {
-                          Get.to(DrawerAndSongsListStack());
-                        },
-                        icon: Icon(FontAwesomeIcons.arrowLeft)),
-                  ),
-                ],
-              ),
-              CurrentSongInfo(size: size, audioQueryController: audioQueryController),
+              GetBuilder<OnAudioQueryController>(builder: (_) {
+                return Stack(
+                  children: [
+                    BackArtworkContainer(
+                        size: size, audioQueryController: audioQueryController),
+                    FrontArtworkContainer(
+                        size: size, audioQueryController: audioQueryController),
+                    Positioned(
+                      top: 20,
+                      left: 20,
+                      child: IconButton(
+                          color: Colors.white70,
+                          onPressed: () {
+                            Get.to(DrawerAndSongsListStack());
+                          },
+                          icon: Icon(FontAwesomeIcons.arrowLeft)),
+                    ),
+                  ],
+                );
+              }),
+              GetBuilder<OnAudioQueryController>(builder: (_) {
+                return CurrentSongInfo(
+                    size: size, audioQueryController: audioQueryController);
+              }),
               MusicSlider(audioQueryController: audioQueryController),
               SongTimeAndPosition(audioQueryController: audioQueryController),
-              PlaybackButtons(size: size, audioQueryController: audioQueryController)
+              PlaybackButtons(
+                  size: size, audioQueryController: audioQueryController)
             ],
           ),
         ),

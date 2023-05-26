@@ -18,6 +18,7 @@ class OnAudioQueryController extends GetxController{
   bool isPlayerViewVisible = false;
   bool isSelectedTile = false;
   bool isFavorite = false;
+  bool isShuffling = false;
   //int selectedIndex =0 ;
 
   @override
@@ -93,6 +94,6 @@ class OnAudioQueryController extends GetxController{
     for (var song in songs){
       sources.add(AudioSource.uri(Uri.parse(song.uri!)));
     }
-    return ConcatenatingAudioSource(children: sources);
+    return ConcatenatingAudioSource(children: sources, useLazyPreparation: true, shuffleOrder: DefaultShuffleOrder(), );
   }
 }

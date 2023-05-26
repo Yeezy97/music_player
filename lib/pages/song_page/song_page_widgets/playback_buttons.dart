@@ -19,18 +19,20 @@ class PlaybackButtons extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: size.height * 0.15,
-      child: Obx(() {
-        return Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            IconButton(
-                onPressed: () {},
-                iconSize: 18,
-                icon: const Icon(FontAwesomeIcons.repeat)),
-            IconButton(
-                onPressed: () {},
-                icon: const Icon(FontAwesomeIcons.backwardStep)),
-            GestureDetector(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          IconButton(
+              onPressed: () {},
+              iconSize: 18,
+              icon: const Icon(FontAwesomeIcons.repeat)),
+          IconButton(
+              onPressed: () {
+                audioQueryController.justAudioPlayer.seekToPrevious();
+              },
+              icon: const Icon(FontAwesomeIcons.backwardStep)),
+          Obx(() {
+            return GestureDetector(
               onTap: () async {
                 audioQueryController.isPlaying.value =
                 !audioQueryController.isPlaying.value;
@@ -52,7 +54,9 @@ class PlaybackButtons extends StatelessWidget {
                       BoxShadow(
                         blurRadius: 6,
                         color: audioQueryController.isPlaying.value
-                            ? Theme.of(context).secondaryHeaderColor
+                            ? Theme
+                            .of(context)
+                            .secondaryHeaderColor
                             : Colors.black45,
                       ),
                     ]),
@@ -60,24 +64,41 @@ class PlaybackButtons extends StatelessWidget {
                   audioQueryController.isPlaying.value
                       ? FontAwesomeIcons.pause
                       : FontAwesomeIcons.play,
-                  color: Theme.of(context).secondaryHeaderColor,
+                  color: Theme
+                      .of(context)
+                      .secondaryHeaderColor,
                   size: 18,
                 ),
               ),
-            ),
-            //PlayAndPauseButton(audioQueryController: audioQueryController),
-            IconButton(
-                onPressed: () {},
-                //color: Theme.of(context).secondaryHeaderColor,
-                icon: const Icon(FontAwesomeIcons.forwardStep)),
-            IconButton(
+            );
+          }),
+          //PlayAndPauseButton(audioQueryController: audioQueryController),
+          IconButton(
+              onPressed: () {
+                audioQueryController.justAudioPlayer.seekToNext();
+              },
+              //color: Theme.of(context).secondaryHeaderColor,
+              icon: const Icon(FontAwesomeIcons.forwardStep)),
+          GetBuilder<OnAudioQueryController>(builder: (_) {
+            return IconButton(
                 iconSize: 20,
-                onPressed: () {},
+                color: audioQueryController.isShuffling ? Theme.of(context).secondaryHeaderColor : null, /// verify functionality of button colors
+                onPressed: () {
+                  audioQueryController.isShuffling =
+                  !audioQueryController.isShuffling;
+                  audioQueryController.justAudioPlayer.setShuffleModeEnabled(
+                      audioQueryController.isShuffling);
+                  //audioQueryController.justAudioPlayer.shuffleModeEnabled;
+                  print(audioQueryController.isShuffling);
+                  print(
+                      audioQueryController.justAudioPlayer.shuffleModeEnabled);
+                  audioQueryController.update();
+                },
                 //color: Theme.of(context).secondaryHeaderColor,
-                icon: const Icon(FontAwesomeIcons.shuffle)),
-          ],
-        );
-      }),
+                icon: Icon(FontAwesomeIcons.shuffle));
+          }),
+        ],
+      ),
     );
   }
 }
