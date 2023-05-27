@@ -120,3 +120,5 @@ ThemeData darkTheme = ThemeData(
   // cardColor: const Color(0xFF1F1F1F),
   cardColor: const Color(0xFF262A56), /// appbar and bottom bar colors
 );
+
+enum RepeatOptions { repeatOff, repeatAll, repeatOne }

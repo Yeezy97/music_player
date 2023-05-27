@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:music_player/components/play_and_pause_button.dart';
 import 'package:music_player/controllers/audio_query_controller.dart';
 
-enum RepeatOptions {repeatOff,repeatAll,repeatOne}
-int i = 0;
-RepeatOptions selectedOption = RepeatOptions.values[i];
+import '../../../constants.dart';
 
+//enum RepeatOptions { repeatOff, repeatAll, repeatOne }
 
+List<String> repeatedOptions = ["repeatOff", "repeatAll", "repeatOne"];
 
 class PlaybackButtons extends StatelessWidget {
   const PlaybackButtons({
@@ -21,35 +22,64 @@ class PlaybackButtons extends StatelessWidget {
   final OnAudioQueryController audioQueryController;
 
 
-    IconData repeatIcons(int i){
-    var selectedOption = RepeatOptions.values[i];
-    switch(selectedOption){
-      case RepeatOptions.repeatOff :
-         return Icons.repeat;
-      case RepeatOptions.repeatAll :
-        return Icons.repeat_on;
-
-      case RepeatOptions.repeatOne :
-        return Icons.repeat_one;
-      default:
-        return Icons.repeat;
-    }
-
-  }
 
   @override
   Widget build(BuildContext context) {
+    Widget repeatIcons() {
+      audioQueryController.selectedRepeatOption = RepeatOptions.values[audioQueryController.enumIndex];
+      switch (audioQueryController.selectedRepeatOption) {
+        case RepeatOptions.repeatOff :
+          return const Icon(Icons.repeat);
+        case RepeatOptions.repeatAll :
+          return Icon(Icons.repeat,color: Theme.of(context).secondaryHeaderColor);
+        case RepeatOptions.repeatOne :
+          return Icon(Icons.repeat_one, color: Theme.of(context).secondaryHeaderColor,);
+        default:
+          return const Icon(Icons.repeat);
+      }
+    }
+
+
+    //RepeatOptions selectedOption = RepeatOptions.values[i];
     return Container(
       width: double.infinity,
       height: size.height * 0.15,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          IconButton(
-              onPressed: () {},
+          GetBuilder<OnAudioQueryController>(builder: (_) {
+            return IconButton(
+              onPressed: () {
+                if (audioQueryController.enumIndex < RepeatOptions.values.length - 1) {
+                  audioQueryController.enumIndex++;
+                } else {
+                  audioQueryController.enumIndex = 0;
+                }
+                audioQueryController.selectedRepeatOption = RepeatOptions.values[audioQueryController.enumIndex];
+                print(audioQueryController.selectedRepeatOption);
+                switch (audioQueryController.selectedRepeatOption) {
+                  case RepeatOptions.repeatOff:
+                    audioQueryController.justAudioPlayer.setLoopMode(
+                        LoopMode.off);
+                    break;
+                  case RepeatOptions.repeatAll:
+                    audioQueryController.justAudioPlayer.setLoopMode(
+                        LoopMode.all);
+                    break;
+                  case RepeatOptions.repeatOne:
+                    audioQueryController.justAudioPlayer.setLoopMode(
+                        LoopMode.one);
+                    break;
+                  default:
+                    audioQueryController.justAudioPlayer.setLoopMode(
+                        LoopMode.off);
+                }
+                audioQueryController.update();
+              },
               iconSize: 18,
-              icon: Icon(repeatIcons(i)),
-          ),
+              icon: repeatIcons(),
+            );
+          }),
           IconButton(
               onPressed: () {
                 audioQueryController.justAudioPlayer.seekToPrevious();
@@ -106,7 +136,11 @@ class PlaybackButtons extends StatelessWidget {
           GetBuilder<OnAudioQueryController>(builder: (_) {
             return IconButton(
                 iconSize: 20,
-                color: audioQueryController.isShuffling ? Theme.of(context).secondaryHeaderColor : null, /// verify functionality of button colors
+                color: audioQueryController.isShuffling ? Theme
+                    .of(context)
+                    .secondaryHeaderColor : null,
+
+                /// verify functionality of button colors
                 onPressed: () {
                   audioQueryController.isShuffling =
                   !audioQueryController.isShuffling;

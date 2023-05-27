@@ -1,8 +1,11 @@
-
+import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:just_audio/just_audio.dart';
+
+import '../constants.dart';
+//enum RepeatOptions { repeatOff, repeatAll, repeatOne }
 
 class OnAudioQueryController extends GetxController{
   Rx<bool> isPlaying = false.obs;
@@ -19,12 +22,17 @@ class OnAudioQueryController extends GetxController{
   bool isSelectedTile = false;
   bool isFavorite = false;
   bool isShuffling = false;
+  var selectedRepeatOption = RepeatOptions.values.first;
+  int enumIndex = 0;
   //int selectedIndex =0 ;
+
+
 
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
+    enumIndex == 0 ? justAudioPlayer.setLoopMode(LoopMode.off) : null;
     createPlayList(songs);
     requestStoragePermission();
     justAudioPlayer.durationStream.listen((newDuration) {
@@ -96,4 +104,6 @@ class OnAudioQueryController extends GetxController{
     }
     return ConcatenatingAudioSource(children: sources, useLazyPreparation: true, shuffleOrder: DefaultShuffleOrder(), );
   }
+
 }
+
