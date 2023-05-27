@@ -4,6 +4,12 @@ import 'package:get/get.dart';
 import 'package:music_player/components/play_and_pause_button.dart';
 import 'package:music_player/controllers/audio_query_controller.dart';
 
+enum RepeatOptions {repeatOff,repeatAll,repeatOne}
+int i = 0;
+RepeatOptions selectedOption = RepeatOptions.values[i];
+
+
+
 class PlaybackButtons extends StatelessWidget {
   const PlaybackButtons({
     Key? key,
@@ -13,6 +19,23 @@ class PlaybackButtons extends StatelessWidget {
 
   final Size size;
   final OnAudioQueryController audioQueryController;
+
+
+    IconData repeatIcons(int i){
+    var selectedOption = RepeatOptions.values[i];
+    switch(selectedOption){
+      case RepeatOptions.repeatOff :
+         return Icons.repeat;
+      case RepeatOptions.repeatAll :
+        return Icons.repeat_on;
+
+      case RepeatOptions.repeatOne :
+        return Icons.repeat_one;
+      default:
+        return Icons.repeat;
+    }
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +48,8 @@ class PlaybackButtons extends StatelessWidget {
           IconButton(
               onPressed: () {},
               iconSize: 18,
-              icon: const Icon(FontAwesomeIcons.repeat)),
+              icon: Icon(repeatIcons(i)),
+          ),
           IconButton(
               onPressed: () {
                 audioQueryController.justAudioPlayer.seekToPrevious();
@@ -95,7 +119,7 @@ class PlaybackButtons extends StatelessWidget {
                   audioQueryController.update();
                 },
                 //color: Theme.of(context).secondaryHeaderColor,
-                icon: Icon(FontAwesomeIcons.shuffle));
+                icon: const Icon(FontAwesomeIcons.shuffle));
           }),
         ],
       ),
