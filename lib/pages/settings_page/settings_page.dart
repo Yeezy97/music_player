@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:music_player/components/settings_expansion_tile.dart';
 import 'package:music_player/components/settings_list_tile.dart';
@@ -13,10 +12,8 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     OnAudioQueryController audioQueryController = Get.put(OnAudioQueryController());
-    SettingsController settingsController = Get.put(SettingsController());
     return Container(
-      decoration: BoxDecoration(
-        //gradient: vividYellowGradientColor,
+      decoration: const BoxDecoration(
         color: Color(0xFF181818),
       ),
       child: SafeArea(
@@ -28,7 +25,7 @@ class SettingsPage extends StatelessWidget {
           backgroundColor: Colors.transparent,
           body: ListView(
             children: [
-              SettingsExpansionTile(tileTitle: Text("Audio", style: settingsExpTileTextStyle,),
+              SettingsExpansionTile(tileTitle: const Text("Audio", style: settingsExpTileTextStyle,),
               tileChildren: [
                 SettingsListTile(tileTitle: "Fading on pause/play", tileSubTitle: "Smooth fading on pause or resume playback",
                 trailingWidget: GetBuilder<SettingsController>(
@@ -58,7 +55,7 @@ class SettingsPage extends StatelessWidget {
                       );
                     }),)
               ],),
-              SettingsExpansionTile(tileTitle: Text("Controls",style: settingsExpTileTextStyle,), tileChildren: [
+              SettingsExpansionTile(tileTitle: const Text("Controls",style: settingsExpTileTextStyle,), tileChildren: [
                 SettingsListTile(tileTitle: "Resume after call", tileSubTitle: "Resume playing after a call if was playing before",
                 trailingWidget: GetBuilder<SettingsController>(
                     builder: (settingsController) {
@@ -73,8 +70,8 @@ class SettingsPage extends StatelessWidget {
                       );
                     }),),
               ]),
-              SettingsExpansionTile(tileTitle: Text("Themes", style: settingsExpTileTextStyle,), tileChildren: []),
-              SettingsExpansionTile(tileTitle: Text("Equalizer", style: settingsExpTileTextStyle,), tileChildren: []),
+              const SettingsExpansionTile(tileTitle: Text("Themes", style: settingsExpTileTextStyle,), tileChildren: []),
+              const SettingsExpansionTile(tileTitle: Text("Equalizer", style: settingsExpTileTextStyle,), tileChildren: []),
             ],
           ),
         ),

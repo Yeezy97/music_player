@@ -18,19 +18,19 @@ class PlayListController extends GetxController {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('List Creator'),
+        title: const Text('List Creator'),
       ),
       body: Column(
         children: <Widget>[
           TextField(
             controller: _textController,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               hintText: 'Enter the list name',
             ),
           ),
           ElevatedButton(
-            child: Text('Create List'),
             onPressed: _addList,
+            child: const Text('Create List'),
           ),
           Expanded(
             child: ListView.builder(

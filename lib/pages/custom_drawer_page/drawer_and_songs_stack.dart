@@ -18,11 +18,9 @@ class DrawerAndSongsListStack extends StatelessWidget {
           onHorizontalDragEnd: controller.onDragEnd,
           //onTap: toggle,
           child: AnimatedBuilder(
-            child: const AllSongsPage(),
             animation: controller.animationController,
             builder: (BuildContext context, child) {
               double slide = controller.maxSlide * controller.animationController.value;
-              print("build complete");
               return Stack(
                 children: [
                   const MyDrawer(),
@@ -34,6 +32,7 @@ class DrawerAndSongsListStack extends StatelessWidget {
                 ],
               );
             },
+            child: const AllSongsPage(),
           ),
         ),
       ),

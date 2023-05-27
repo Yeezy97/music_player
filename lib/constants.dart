@@ -67,7 +67,7 @@ LinearGradient vividYellowGradientColor = const LinearGradient(
 
 ThemeData lightTheme = ThemeData(
   scrollbarTheme: const ScrollbarThemeData(
-    thumbColor: MaterialStatePropertyAll(Color(0xFFDC5F00)),
+    thumbColor: MaterialStatePropertyAll(Color(0xFF0046DC)),
 
   ),
   iconTheme: const IconThemeData(
@@ -85,8 +85,8 @@ ThemeData lightTheme = ThemeData(
     accentColor: Colors.grey.withOpacity(0.1),
   ),
   // primaryColor:  Color(0xFFA6A6A6),
-  primaryColor:  Color(0xFF232322),
-  secondaryHeaderColor:  Color(0xFF2B3467),
+  primaryColor:  const Color(0xFF232322),
+  secondaryHeaderColor:  const Color(0xFF2B3467),
   primaryColorLight: const Color(0xffffffff),
   primaryColorDark: Colors.black87,
   cardColor: const Color(0xFFF1F1F1),

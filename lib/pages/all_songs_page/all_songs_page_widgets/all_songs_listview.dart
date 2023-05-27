@@ -1,25 +1,18 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:music_player/controllers/audio_query_controller.dart';
-import 'package:music_player/controllers/selected_index_controller.dart';
 import 'package:music_player/pages/all_songs_page/all_songs_page_widgets/artwork_widget.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 class AllSongsListView extends StatelessWidget {
   AllSongsListView({
     Key? key,
-    //required this.audioQueryController,
     required this.size,
-    //required this.selectedIndexController,
   }) : super(key: key);
-
-  //final OnAudioQueryController audioQueryController;
   final Size size;
   final ScrollController _firstController = ScrollController();
 
-  //final SelectedIndexController selectedIndexController;
   @override
   Widget build(BuildContext context) {
     OnAudioQueryController audioQueryController =
@@ -52,6 +45,7 @@ class AllSongsListView extends StatelessWidget {
           return Scrollbar(
             controller: _firstController,
             thickness: 3,
+
             child: ListView.builder(
               itemCount: audioQueryController.songs.length,
               itemBuilder: (context, index) {
@@ -61,15 +55,12 @@ class AllSongsListView extends StatelessWidget {
                 return Column(
                   children: [
                     Container(
-                      padding: const EdgeInsets.symmetric(vertical: 0),
-                      margin: const EdgeInsets.all(0),
                       child: GetBuilder<OnAudioQueryController>(builder: (_) {
                         return ListTile(
                           leading: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Container( /// ARTWORK WIDGET
-                                padding: const EdgeInsets.all(0),
                                 constraints: const BoxConstraints(
                                   maxHeight: 50,
                                   maxWidth: 50,
@@ -137,15 +128,13 @@ class AllSongsListView extends StatelessWidget {
                                     ),
                                   ),
                                   Container(
-                                    margin: EdgeInsets.all(1),
+                                    margin: const EdgeInsets.all(1),
                                     width: 31,
                                     height: 31,
                                     child: IconButton(
                                         onPressed: () {
                                           audioQueryController
                                               .toggleFavorite(song);
-                                          print(audioQueryController
-                                              .favoriteSongs.length);
                                         },
                                         icon: audioQueryController
                                                 .isFavoriteSong(song)
@@ -160,7 +149,6 @@ class AllSongsListView extends StatelessWidget {
                                           size: 16,
                                               ),
                                       splashRadius: 10,
-                                      padding: EdgeInsets.all(0),
                                     ),
                                   ),
                                 ],
@@ -168,7 +156,7 @@ class AllSongsListView extends StatelessWidget {
                             ],
                           ),
                           trailing: Container(
-                            margin: EdgeInsets.all(1),
+                            margin: const EdgeInsets.all(1),
                             width: 31,
                             height: 31,
                             child: IconButton(
@@ -179,7 +167,7 @@ class AllSongsListView extends StatelessWidget {
                                 size: 18,
                               ),
                               splashRadius: 15,
-                              padding: EdgeInsets.all(0),
+                              padding: const EdgeInsets.all(0),
 
                             ),
                           ),

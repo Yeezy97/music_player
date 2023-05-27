@@ -70,7 +70,7 @@ class DrawerControllerImp extends DrawerController with GetSingleTickerProviderS
     super.onInit();
     animationController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 250),
+      duration: const Duration(milliseconds: 250),
     );
   }
   @override
@@ -82,7 +82,7 @@ class DrawerControllerImp extends DrawerController with GetSingleTickerProviderS
 
   @override
   goToMusicScreen() {
-    Get.to(SongPage());
+    Get.to(const SongPage());
     Get.delete<DrawerControllerImp>();
   }
 }

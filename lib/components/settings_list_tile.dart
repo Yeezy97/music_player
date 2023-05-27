@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-import '../controllers/settings_controller.dart';
 
 class SettingsListTile extends StatelessWidget {
   const SettingsListTile({Key? key, required this.tileTitle, required this.tileSubTitle, required this.trailingWidget}) : super(key: key);
@@ -20,7 +18,7 @@ class SettingsListTile extends StatelessWidget {
       ),
       title: Text(
         tileTitle,
-        style: TextStyle(color: Colors.white),
+        style: const TextStyle(color: Colors.white),
       ),
       trailing: trailingWidget,
     );

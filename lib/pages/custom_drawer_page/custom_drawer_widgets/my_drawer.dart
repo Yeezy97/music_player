@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:music_player/components/play_list_tile.dart';
 import 'package:music_player/controllers/drawer_controller.dart';
-import 'package:music_player/controllers/settings_controller.dart';
 import 'package:music_player/controllers/theme_controller.dart';
 import 'package:music_player/pages/settings_page/settings_page.dart';
 
@@ -13,7 +12,6 @@ class MyDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SettingsController settingsController = Get.put(SettingsController());
     DrawerControllerImp drawerController = Get.put(DrawerControllerImp());
     ThemeController themeController = Get.put(ThemeController());
     Size size = MediaQuery
@@ -21,7 +19,7 @@ class MyDrawer extends StatelessWidget {
         .size;
     return Container(
       width: double.infinity,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white
         //color: Color(0xFFFAF9F6),
         //color: Colors.black,
@@ -44,10 +42,10 @@ class MyDrawer extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               width: size.width / 2,
               height: size.height / 6,
-              child: Text(
+              child: const Text(
                 "Music \n  Player",
                 style: TextStyle(
                   color: Colors.black45,
@@ -57,7 +55,7 @@ class MyDrawer extends StatelessWidget {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               width: size.width * 0.6,
               height: size.height * 0.7,
               child: ListView(
@@ -71,8 +69,8 @@ class MyDrawer extends StatelessWidget {
                       drawerController.goToMusicScreen();
                     },
                   ),
-                  DrawerTile(tileIcon: Icons.favorite, drawerTileText: "Favorites"),
-                  ExpansionTile(
+                  const DrawerTile(tileIcon: Icons.favorite, drawerTileText: "Favorites"),
+                  const ExpansionTile(
                     title: Row(
                       children: [
                         Icon(Icons.playlist_play),
@@ -94,10 +92,10 @@ class MyDrawer extends StatelessWidget {
                   ),
                   DrawerTile(
                     ontap: (){
-                      Get.to(SettingsPage());
+                      Get.to(const SettingsPage());
                     },
                       tileIcon: Icons.settings, drawerTileText: "Settings"),
-                  DrawerTile(tileIcon: Icons.brush, drawerTileText: "Themes"),
+                  const DrawerTile(tileIcon: Icons.brush, drawerTileText: "Themes"),
                   GetBuilder<ThemeController>(builder: (_) {
                     return DrawerTile(ontap: () {
                       // settingsController.lightModeSwitch();

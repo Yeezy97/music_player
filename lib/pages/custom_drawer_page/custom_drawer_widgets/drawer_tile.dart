@@ -17,7 +17,7 @@ class DrawerTile extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Icon(tileIcon),
-            SizedBox(width: 10,),
+            const SizedBox(width: 10,),
             Text(drawerTileText!,
               style: const TextStyle(
                   fontSize: 15,

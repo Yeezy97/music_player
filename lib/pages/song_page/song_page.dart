@@ -3,7 +3,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:music_player/pages/custom_drawer_page/drawer_and_songs_stack.dart';
 import 'package:music_player/controllers/audio_query_controller.dart';
-import 'package:music_player/controllers/song_button_controller.dart';
 import 'package:music_player/pages/song_page/song_page_widgets/music_slider.dart';
 import 'song_page_widgets/back_artwork_container.dart';
 import 'song_page_widgets/current_song_info.dart';
@@ -56,9 +55,9 @@ class SongPage extends StatelessWidget {
                       child: IconButton(
                           color: Colors.white70,
                           onPressed: () {
-                            Get.to(DrawerAndSongsListStack());
+                            Get.to(const DrawerAndSongsListStack());
                           },
-                          icon: Icon(FontAwesomeIcons.arrowLeft)),
+                          icon: const Icon(FontAwesomeIcons.arrowLeft)),
                     ),
                   ],
                 );

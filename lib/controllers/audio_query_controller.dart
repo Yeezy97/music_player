@@ -1,11 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:just_audio/just_audio.dart';
-
 import '../constants.dart';
-//enum RepeatOptions { repeatOff, repeatAll, repeatOne }
 
 class OnAudioQueryController extends GetxController{
   Rx<bool> isPlaying = false.obs;

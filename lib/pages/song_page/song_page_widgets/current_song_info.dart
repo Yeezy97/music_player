@@ -15,7 +15,7 @@ class CurrentSongInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 15),
+      padding: const EdgeInsets.symmetric(horizontal: 15),
       width: double.infinity,
       height: size.height * 0.15,
       child: Center(
