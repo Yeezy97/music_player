@@ -14,11 +14,12 @@ class SettingsListTile extends StatelessWidget {
       subtitle: Text(
         tileSubTitle,
         style: TextStyle(
-            fontSize: 13, color: Colors.grey.shade400),
+            fontSize: 13, color: Colors.grey.shade400,
+        ),
       ),
       title: Text(
         tileTitle,
-        style: const TextStyle(color: Colors.white),
+        style:  const TextStyle(color: Colors.white),
       ),
       trailing: trailingWidget,
     );

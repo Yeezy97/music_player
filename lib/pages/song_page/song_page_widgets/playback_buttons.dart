@@ -24,13 +24,13 @@ class PlaybackButtons extends StatelessWidget {
       audioQueryController.selectedRepeatOption = RepeatOptions.values[audioQueryController.enumIndex];
       switch (audioQueryController.selectedRepeatOption) {
         case RepeatOptions.repeatOff :
-          return const Icon(Icons.repeat);
+          return  const Icon(Icons.repeat);
         case RepeatOptions.repeatAll :
           return Icon(Icons.repeat,color: Theme.of(context).secondaryHeaderColor);
         case RepeatOptions.repeatOne :
           return Icon(Icons.repeat_one, color: Theme.of(context).secondaryHeaderColor,);
         default:
-          return const Icon(Icons.repeat);
+          return  const Icon(Icons.repeat);
       }
     }
 
@@ -78,7 +78,7 @@ class PlaybackButtons extends StatelessWidget {
               onPressed: () {
                 audioQueryController.justAudioPlayer.seekToPrevious();
               },
-              icon: const Icon(FontAwesomeIcons.backwardStep)),
+              icon:  const Icon(FontAwesomeIcons.backwardStep)),
           Obx(() {
             return GestureDetector(
               onTap: () async {
@@ -91,8 +91,8 @@ class PlaybackButtons extends StatelessWidget {
                 }
               },
               child: AnimatedContainer(
-                duration: const Duration(milliseconds: 300),
-                padding: const EdgeInsets.all(8),
+                duration:  const Duration(milliseconds: 300),
+                padding:  const EdgeInsets.all(8),
                 height: 47,
                 width: 47,
                 decoration: BoxDecoration(
@@ -124,7 +124,7 @@ class PlaybackButtons extends StatelessWidget {
               onPressed: () {
                 audioQueryController.justAudioPlayer.seekToNext();
               },
-              icon: const Icon(FontAwesomeIcons.forwardStep)),
+              icon:  const Icon(FontAwesomeIcons.forwardStep)),
           GetBuilder<OnAudioQueryController>(builder: (_) {
             return IconButton(
                 iconSize: 20,
@@ -140,7 +140,7 @@ class PlaybackButtons extends StatelessWidget {
                       audioQueryController.isShuffling);
                   audioQueryController.update();
                 },
-                icon: const Icon(FontAwesomeIcons.shuffle));
+                icon:  const Icon(FontAwesomeIcons.shuffle));
           }),
         ],
       ),

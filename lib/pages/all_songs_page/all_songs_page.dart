@@ -25,7 +25,7 @@ class AllSongsPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColorLight,
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(60),
+        preferredSize:  const Size.fromHeight(60),
           child: SongsPageAppBar(drawerControllerImp: drawerControllerImp,)),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -41,7 +41,7 @@ class AllSongsPage extends StatelessWidget {
                     //color: Colors.black.withOpacity(0.9),
                     image:  DecorationImage(
                         opacity: themeController.lightMode ? 0.15 : 0.15,
-                        image: const AssetImage("assets/images/long_background.png"),
+                        image:  const AssetImage("assets/images/long_background.png"),
                         fit: BoxFit.cover),
                   ),
                   child: AllSongsListView(size: size,),
@@ -54,7 +54,7 @@ class AllSongsPage extends StatelessWidget {
             decoration:  BoxDecoration(
               //color: Color(0xFF181818),
                 color: Theme.of(context).cardColor,
-                borderRadius: const BorderRadius.only(
+                borderRadius:  const BorderRadius.only(
                     topRight: Radius.circular(10),
                     topLeft: Radius.circular(10))),
             height: 70,
@@ -69,7 +69,7 @@ class AllSongsPage extends StatelessWidget {
                     onPressed: () {
                       audioQueryController.justAudioPlayer.seekToPrevious();
                     },
-                    icon:  const Icon(
+                    icon:   const Icon(
                       FontAwesomeIcons.backwardStep,
                       //color: Theme.of(context).iconTheme.color,
                       size: 18,
@@ -80,7 +80,7 @@ class AllSongsPage extends StatelessWidget {
                       audioQueryController.justAudioPlayer.seekToNext();
                       // selectedIndexController.updateIndex(audioQueryController.currentIndex);
                     },
-                    icon:  const Icon(
+                    icon:   const Icon(
                       FontAwesomeIcons.forwardStep,
                       //color: Theme.of(context).iconTheme.color,
                       size: 18,

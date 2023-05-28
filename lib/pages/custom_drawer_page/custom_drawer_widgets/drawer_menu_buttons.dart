@@ -9,14 +9,14 @@ class DrawerMenuButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
-      color: const Color(0xFFF5F0F6),
+      color:  const Color(0xFFF5F0F6),
       splashColor: Colors.red,
       height: 60,
       minWidth: double.infinity,
       elevation: 5,
       focusColor: Colors.grey.shade700,
-      padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
-      shape: const Border(
+      padding:  const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
+      shape:  const Border(
         top: BorderSide(
           color: Colors.white24,
         ),

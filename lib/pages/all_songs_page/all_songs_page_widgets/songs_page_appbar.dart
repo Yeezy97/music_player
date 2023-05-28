@@ -16,16 +16,16 @@ class SongsPageAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppBar(
       leading: Padding(
-        padding: const EdgeInsets.only(left: 20),
+        padding:  const EdgeInsets.only(left: 20),
         child: MaterialButton(
-          shape: const CircleBorder(),
+          shape:  const CircleBorder(),
           splashColor: Colors.transparent,
           //color: Theme.of(context).primaryColor,
           //color: Color(0xFFE0DCCE),
           //color: const Color(0xFF010101),
           minWidth: 35,
           enableFeedback: false,
-          padding: const EdgeInsets.all(3),
+          padding:  const EdgeInsets.all(3),
           height: 10,
           elevation: 8,
           onPressed: () {
@@ -53,7 +53,7 @@ class SongsPageAppBar extends StatelessWidget {
         GestureDetector(
           // search button
           child: Container(
-            margin: const EdgeInsets.only(right: 5),
+            margin:  const EdgeInsets.only(right: 5),
             color: Colors.transparent,
             width: 40,
             height: 40,
@@ -64,14 +64,14 @@ class SongsPageAppBar extends StatelessWidget {
         GestureDetector(
           // settings button
           child: Container(
-            margin: const EdgeInsets.only(right: 20),
+            margin:  const EdgeInsets.only(right: 20),
             color: Colors.transparent,
             width: 40,
             height: 40,
             child: Icon(Icons.settings, color: Theme.of(context).iconTheme.color,),
           ),
           onTap: () {
-            Get.to(() => const SettingsPage());
+            Get.to(() =>  const SettingsPage());
           },
         ),
       ],

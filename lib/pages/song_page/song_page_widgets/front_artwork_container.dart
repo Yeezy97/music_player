@@ -26,8 +26,8 @@ class FrontArtworkContainer extends StatelessWidget {
           maxHeight: size.width * 0.6,
         ),
         decoration:  BoxDecoration(
-          boxShadow: const [
-            BoxShadow(
+          boxShadow:  [
+            const BoxShadow(
               offset: Offset(5, 5),
               color: Colors.black,
               blurRadius: 15,

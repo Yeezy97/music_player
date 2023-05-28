@@ -24,8 +24,8 @@ class PlayAndPauseButton extends StatelessWidget {
           audioQueryController.isPlaying.value = !audioQueryController.isPlaying.value; /// fix this shit
         },
         child: AnimatedContainer(
-          duration: const Duration(milliseconds: 300),
-          padding: const EdgeInsets.all(8),
+          duration:  const Duration(milliseconds: 300),
+          padding:  const EdgeInsets.all(8),
           height: 47,
           width: 47,
           decoration: BoxDecoration(

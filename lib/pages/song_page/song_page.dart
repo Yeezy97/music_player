@@ -55,9 +55,9 @@ class SongPage extends StatelessWidget {
                       child: IconButton(
                           color: Colors.white70,
                           onPressed: () {
-                            Get.to(const DrawerAndSongsListStack());
+                            Get.to( const DrawerAndSongsListStack());
                           },
-                          icon: const Icon(FontAwesomeIcons.arrowLeft)),
+                          icon:  const Icon(FontAwesomeIcons.arrowLeft)),
                     ),
                   ],
                 );

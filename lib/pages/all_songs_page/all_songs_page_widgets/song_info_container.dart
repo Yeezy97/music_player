@@ -19,13 +19,13 @@ class SongInfoContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding:
-      const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+       const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       child: GestureDetector(
         onTap: () {
-          Get.to(() => const SongPage());
+          Get.to(() =>  const SongPage());
         },
         child: Container(
-          padding: const EdgeInsets.symmetric(
+          padding:  const EdgeInsets.symmetric(
               vertical: 4, horizontal: 5),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
@@ -47,8 +47,8 @@ class SongInfoContainer extends StatelessWidget {
                 height: 50,
                 width: 50,
                 decoration: BoxDecoration(
-                  boxShadow: const [
-                    BoxShadow(
+                  boxShadow:  [
+                    const BoxShadow(
                         offset: Offset(3, 2),
                         blurRadius: 5,
                         color: Colors.black54)
@@ -59,11 +59,11 @@ class SongInfoContainer extends StatelessWidget {
                   return ArtWorkWidget(audioQueryController: audioQueryController, index: audioQueryController.currentIndex, artworkSize: 200);
                 }),
               ), // song thumbnail
-              const SizedBox(
+               const SizedBox(
                 width: 7,
               ),
               Container(
-                padding: const EdgeInsets.all(3.0),
+                padding:  const EdgeInsets.all(3.0),
                 constraints: BoxConstraints(
                   maxWidth: size.width * 0.29,
                   maxHeight: 50,

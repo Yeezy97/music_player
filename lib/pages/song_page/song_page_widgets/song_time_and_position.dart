@@ -16,7 +16,7 @@ class SongTimeAndPosition extends StatelessWidget {
     return Obx(() {
       return Padding(
         padding:
-        const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+         const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

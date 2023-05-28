@@ -9,7 +9,7 @@ class SettingsExpansionTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
+      decoration:  const BoxDecoration(
         border: Border(
           top: BorderSide(color: Colors.black38),
           bottom: BorderSide(color: Colors.black38),
@@ -22,13 +22,13 @@ class SettingsExpansionTile extends StatelessWidget {
         //color: Color(0xFF145364),
       ),
       child: ExpansionTile(
-        childrenPadding: const EdgeInsets.symmetric(horizontal: 10),
-        tilePadding: const EdgeInsets.symmetric(horizontal: 10),
-        textColor: const Color(0xFFFD703B),
-        iconColor: const Color(0xFFFD703B),
+        childrenPadding:  const EdgeInsets.symmetric(horizontal: 10),
+        tilePadding:  const EdgeInsets.symmetric(horizontal: 10),
+        textColor:  const Color(0xFFFD703B),
+        iconColor:  const Color(0xFFFD703B),
         collapsedTextColor: Colors.white,
         collapsedIconColor: Colors.white,
-        collapsedBackgroundColor: const Color(0xFF3C2A21),
+        collapsedBackgroundColor:  const Color(0xFF3C2A21),
 
         //backgroundColor: Colors.blueGrey,
         title:tileTitle,

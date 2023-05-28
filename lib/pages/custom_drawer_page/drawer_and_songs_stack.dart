@@ -23,7 +23,7 @@ class DrawerAndSongsListStack extends StatelessWidget {
               double slide = controller.maxSlide * controller.animationController.value;
               return Stack(
                 children: [
-                  const MyDrawer(),
+                   const MyDrawer(),
                   Transform(
                     transform: Matrix4.identity()
                       ..translate(slide),
@@ -32,7 +32,7 @@ class DrawerAndSongsListStack extends StatelessWidget {
                 ],
               );
             },
-            child: const AllSongsPage(),
+            child:  const AllSongsPage(),
           ),
         ),
       ),

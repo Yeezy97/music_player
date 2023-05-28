@@ -2,11 +2,9 @@ import 'package:get/get.dart';
 
 class SettingsController extends GetxController{
    bool isFadingOn = true;
-  // bool isSwitchedOn = true;
    bool isGaplessOn = true;
    bool isResumeAfterCallOn = true;
    bool isLightMode = false;
-
 
   void fadingSwitch() {
     isFadingOn = !isFadingOn;
@@ -24,8 +22,4 @@ class SettingsController extends GetxController{
     isLightMode = !isLightMode;
     update();
   }
-
-
-
-
 }

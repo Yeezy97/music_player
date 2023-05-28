@@ -11,10 +11,10 @@ class PlayListTile extends StatelessWidget {
       leading: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const SizedBox(width: 20,),
+           const SizedBox(width: 20,),
           Text(
             tileText!,
-            style: const TextStyle(
+            style:  const TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.bold,
                 color: Colors.black45),

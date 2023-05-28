@@ -28,12 +28,12 @@ class AllSongsListView extends StatelessWidget {
         builder: (context, item) {
           // loading content indicator
           if (item.data == null) {
-            return const Center(
+            return  const Center(
               child: CircularProgressIndicator(),
             );
           }
           if (item.data!.isEmpty) {
-            return const Center(
+            return  const Center(
               child: Text(" No Songs Found"),
 
               /// don't forget permission alternatives (allow/deny)
@@ -61,11 +61,11 @@ class AllSongsListView extends StatelessWidget {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Container( /// ARTWORK WIDGET
-                                constraints: const BoxConstraints(
+                                constraints:  const BoxConstraints(
                                   maxHeight: 50,
                                   maxWidth: 50,
                                 ),
-                                decoration: const BoxDecoration(
+                                decoration:  const BoxDecoration(
                                   color: Colors.black,
                                 ),
                                 child: ArtWorkWidget(
@@ -74,7 +74,7 @@ class AllSongsListView extends StatelessWidget {
                                   index: index,
                                 ),
                               ),
-                              const SizedBox(
+                               const SizedBox(
                                 width: 3,
                               ),
                               Row(
@@ -83,7 +83,7 @@ class AllSongsListView extends StatelessWidget {
                                     constraints: BoxConstraints(
                                         minWidth: size.width * 0.57,
                                         maxWidth: size.width * 0.57),
-                                    padding: const EdgeInsets.all(3),
+                                    padding:  const EdgeInsets.all(3),
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -128,7 +128,7 @@ class AllSongsListView extends StatelessWidget {
                                     ),
                                   ),
                                   Container(
-                                    margin: const EdgeInsets.all(1),
+                                    margin:  const EdgeInsets.all(1),
                                     width: 31,
                                     height: 31,
                                     child: IconButton(
@@ -156,7 +156,7 @@ class AllSongsListView extends StatelessWidget {
                             ],
                           ),
                           trailing: Container(
-                            margin: const EdgeInsets.all(1),
+                            margin:  const EdgeInsets.all(1),
                             width: 31,
                             height: 31,
                             child: IconButton(
@@ -167,7 +167,7 @@ class AllSongsListView extends StatelessWidget {
                                 size: 18,
                               ),
                               splashRadius: 15,
-                              padding: const EdgeInsets.all(0),
+                              padding:  const EdgeInsets.all(0),
 
                             ),
                           ),

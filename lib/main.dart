@@ -4,7 +4,7 @@ import 'package:music_player/pages/custom_drawer_page/drawer_and_songs_stack.dar
 import 'package:get/get.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp( const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         themeMode: ThemeMode.dark,
         theme: lightTheme,
         darkTheme: darkTheme,
-        home: const DrawerAndSongsListStack(),
+        home:  const DrawerAndSongsListStack(),
       );
 
   }

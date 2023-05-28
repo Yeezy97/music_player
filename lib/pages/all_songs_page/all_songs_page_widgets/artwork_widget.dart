@@ -23,7 +23,7 @@ class ArtWorkWidget extends StatelessWidget {
       size: artworkSize,
       artworkBorder: BorderRadius.zero,
       nullArtworkWidget: Container(
-        decoration: const BoxDecoration(
+        decoration:  const BoxDecoration(
           image: DecorationImage(
               opacity: 0.9,
               image: AssetImage("assets/images/background_logo.png",),

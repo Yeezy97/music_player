@@ -19,7 +19,7 @@ class MyDrawer extends StatelessWidget {
         .size;
     return Container(
       width: double.infinity,
-      decoration: const BoxDecoration(
+      decoration:  const BoxDecoration(
         color: Colors.white
         //color: Color(0xFFFAF9F6),
         //color: Colors.black,
@@ -42,10 +42,10 @@ class MyDrawer extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              padding: const EdgeInsets.all(8.0),
+              padding:  const EdgeInsets.all(8.0),
               width: size.width / 2,
               height: size.height / 6,
-              child: const Text(
+              child:  const Text(
                 "Music \n  Player",
                 style: TextStyle(
                   color: Colors.black45,
@@ -55,12 +55,12 @@ class MyDrawer extends StatelessWidget {
               ),
             ),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              padding:  const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               width: size.width * 0.6,
               height: size.height * 0.7,
               child: ListView(
                 children: [
-                  const DrawerTile(
+                   const DrawerTile(
                       tileIcon: Icons.music_note, drawerTileText: "All Songs"),
                   DrawerTile(
                     tileIcon: Icons.play_arrow_outlined,
@@ -69,8 +69,8 @@ class MyDrawer extends StatelessWidget {
                       drawerController.goToMusicScreen();
                     },
                   ),
-                  const DrawerTile(tileIcon: Icons.favorite, drawerTileText: "Favorites"),
-                  const ExpansionTile(
+                   const DrawerTile(tileIcon: Icons.favorite, drawerTileText: "Favorites"),
+                   const ExpansionTile(
                     title: Row(
                       children: [
                         Icon(Icons.playlist_play),
@@ -95,7 +95,7 @@ class MyDrawer extends StatelessWidget {
                       Get.to(const SettingsPage());
                     },
                       tileIcon: Icons.settings, drawerTileText: "Settings"),
-                  const DrawerTile(tileIcon: Icons.brush, drawerTileText: "Themes"),
+                   const DrawerTile(tileIcon: Icons.brush, drawerTileText: "Themes"),
                   GetBuilder<ThemeController>(builder: (_) {
                     return DrawerTile(ontap: () {
                       // settingsController.lightModeSwitch();

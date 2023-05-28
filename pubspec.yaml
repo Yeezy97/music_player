@@ -36,12 +36,12 @@ dependencies:
   cupertino_icons: ^1.0.2
   font_awesome_flutter: ^10.2.1
   get: ^4.6.5
-  google_fonts: ^4.0.4
+  google_fonts: ^4.0.5
   on_audio_query: ^2.6.1
   just_audio: ^0.9.31
   permission_handler: ^10.2.0
   shared_preferences: ^2.0.17
-  sqflite: ^2.2.4+1
+  sqflite: ^2.2.8+4
 
 dev_dependencies:
   flutter_test:
