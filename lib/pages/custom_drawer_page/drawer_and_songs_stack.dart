@@ -12,7 +12,8 @@ class DrawerAndSongsListStack extends StatelessWidget {
     DrawerControllerImp controller = Get.put(DrawerControllerImp());
     return RepaintBoundary(
       child: Scaffold(
-        body: GestureDetector(
+        resizeToAvoidBottomInset: false,
+        body: GestureDetector( /// DRAWER DRAGGING ANIMATIONS
           onHorizontalDragStart: controller.onDragStart,
           onHorizontalDragUpdate: controller.onDragUpdate,
           onHorizontalDragEnd: controller.onDragEnd,

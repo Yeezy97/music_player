@@ -18,14 +18,9 @@ class AllSongsListView extends StatelessWidget {
     OnAudioQueryController audioQueryController =
         Get.put(OnAudioQueryController());
 
-    return FutureBuilder<List<SongModel>>(
-        future: audioQueryController.onAudioQuery.querySongs(
-          sortType: null,
-          orderType: OrderType.ASC_OR_SMALLER,
-          uriType: UriType.EXTERNAL,
-          ignoreCase: true,
-        ),
-        builder: (context, item) {
+    return FutureBuilder<List<SongModel>>( /// Load each song from Storage into songs list
+        future: audioQueryController.importSongs(),
+        builder: (context, AsyncSnapshot item) {
           // loading content indicator
           if (item.data == null) {
             return  const Center(
@@ -41,16 +36,17 @@ class AllSongsListView extends StatelessWidget {
           }
           //audioQueryController.songs.clear();
           audioQueryController.songs = item.data!;
-          //selectedIndexController.selectedIndex.value = audioQueryController.currentIndex;
+          audioQueryController.searchedSongs = audioQueryController.songs;
+          print(audioQueryController.songs.length);
+          print("test songs list length is : ${audioQueryController.testSongs.length}");
+
           return Scrollbar(
             controller: _firstController,
             thickness: 3,
-
-            child: ListView.builder(
-              itemCount: audioQueryController.songs.length,
+            child: ListView.builder( /// Songs Playlist Builder
+              itemCount: audioQueryController.searchedSongs.length ,
               itemBuilder: (context, index) {
-                //audioQueryController.currentIndex = index;
-                final song = audioQueryController.songs[index];
+                final song = audioQueryController.searchedSongs[index];
 
                 return Column(
                   children: [
@@ -89,15 +85,14 @@ class AllSongsListView extends StatelessWidget {
                                           CrossAxisAlignment.start,
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
-                                        Text(
+                                        Text( /// SONG TITLE WIDGET
                                           audioQueryController
-                                              .songs[index].title,
+                                              .searchedSongs[index].title,
                                           style: TextStyle(
                                             color: audioQueryController
                                                         .currentIndex ==
                                                     index
                                                 ? Theme.of(context).secondaryHeaderColor
-                                            //const Color(0xFFDC5F00)
                                                 : Theme.of(context)
                                                     .primaryColor,
                                             fontSize: 15,
@@ -108,15 +103,14 @@ class AllSongsListView extends StatelessWidget {
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                         ),
-                                        Text(
+                                        Text( /// ARTIST NAME WIDGET
                                           audioQueryController
-                                              .songs[index].artist!,
+                                              .searchedSongs[index].artist!,
                                           style: TextStyle(
                                             color: audioQueryController
                                                         .currentIndex ==
                                                     index
                                                 ? Theme.of(context).secondaryHeaderColor
-                                            //const Color(0xFFDC5F00)
                                                 : Theme.of(context)
                                                     .primaryColor,
                                             fontSize: 11,
@@ -127,7 +121,7 @@ class AllSongsListView extends StatelessWidget {
                                       ],
                                     ),
                                   ),
-                                  Container(
+                                  Container( /// FAVORITE BUTTON
                                     margin:  const EdgeInsets.all(1),
                                     width: 31,
                                     height: 31,
@@ -155,7 +149,7 @@ class AllSongsListView extends StatelessWidget {
                               ),
                             ],
                           ),
-                          trailing: Container(
+                          trailing: Container( /// SONG PARAMETERS BUTTON
                             margin:  const EdgeInsets.all(1),
                             width: 31,
                             height: 31,
@@ -171,17 +165,14 @@ class AllSongsListView extends StatelessWidget {
 
                             ),
                           ),
-                          tileColor: audioQueryController.currentIndex == index
+                          tileColor: audioQueryController.currentIndex == index /// TILE COLOR CONDITIONS
                               ? Theme.of(context).primaryColor.withOpacity(0.15)
-                          //Color(0xFFFFFFFF).withOpacity(0.2)
                               : Theme.of(context).primaryColorLight,
                           onTap: () async {
-                            // selectedIndexController.updateIndex(
-                            //     index);
-                            await audioQueryController.justAudioPlayer
+                            await audioQueryController.justAudioPlayer /// PLAY SONG FROM STORAGE ON TAP
                                 .setAudioSource(
                               audioQueryController
-                                  .createPlayList(audioQueryController.songs),
+                                  .createPlayList(audioQueryController.searchedSongs),
                               initialIndex: index,
                             );
                             if (audioQueryController.isPlaying.value == false) {

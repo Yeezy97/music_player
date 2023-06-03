@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:on_audio_query/on_audio_query.dart';
@@ -5,12 +6,14 @@ import 'package:just_audio/just_audio.dart';
 import '../constants.dart';
 
 class OnAudioQueryController extends GetxController{
+  late TextEditingController searchController;
   Rx<bool> isPlaying = false.obs;
   Rx<Duration> songDuration = Duration.zero.obs;
   Rx<Duration> songPosition = Duration.zero.obs;
   AudioPlayer justAudioPlayer = AudioPlayer();
   OnAudioQuery onAudioQuery = OnAudioQuery();
-  List<SongModel> songs = [];
+  late List<SongModel> songs = [];
+  late List<SongModel> searchedSongs = songs; /// remove this when done
   List<SongModel> favoriteSongs = [];
   String currentSongTitle = ' ';
   String currentSongArtist = ' ';
@@ -21,16 +24,21 @@ class OnAudioQueryController extends GetxController{
   bool isShuffling = false;
   var selectedRepeatOption = RepeatOptions.values.first;
   int enumIndex = 0;
-  //int selectedIndex =0 ;
-
+  late int searchedSongsListLength;
+  List<SongModel> testSongs = [];
 
 
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
+    updateListLength();
+    importSongs();
+
+    searchController = TextEditingController();
     enumIndex == 0 ? justAudioPlayer.setLoopMode(LoopMode.off) : null;
     createPlayList(songs);
+    //searchedSongs = songs;
     requestStoragePermission();
     justAudioPlayer.durationStream.listen((newDuration) {
       songDuration.value = newDuration!;
@@ -101,6 +109,36 @@ class OnAudioQueryController extends GetxController{
     }
     return ConcatenatingAudioSource(children: sources, useLazyPreparation: true, shuffleOrder: DefaultShuffleOrder(), );
   }
+  // This function is called whenever the text field changes
+
+  void searchSong(String enteredKeyword) {
+    if(enteredKeyword.isEmpty){
+      searchedSongs = songs;
+    } else{
+      final suggestions = songs.where((song){
+        final searchedSongTitle = song.displayName.toLowerCase();
+        final input =  enteredKeyword.toLowerCase();
+        return searchedSongTitle.contains(input);
+      }).toList();
+      searchedSongs = suggestions;
+    }
+    update();
+  }
+  Future<List<SongModel>> importSongs()async{
+     testSongs = await OnAudioQuery().querySongs(
+      sortType: null,
+      orderType: OrderType.ASC_OR_SMALLER,
+      uriType: UriType.EXTERNAL,
+      ignoreCase: true,
+    );
+    return testSongs;
+  }
+
+  updateListLength(){
+    searchedSongsListLength = songs.length;
+    update();
+  }
+
 
 }
 

@@ -23,6 +23,7 @@ class AllSongsPage extends StatelessWidget {
     DrawerControllerImp drawerControllerImp = Get.put(DrawerControllerImp());
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Theme.of(context).primaryColorLight,
       appBar: PreferredSize(
         preferredSize:  const Size.fromHeight(60),
